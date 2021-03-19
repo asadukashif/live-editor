@@ -1,7 +1,14 @@
 {% extends '../template.html' %}
 
 {% block content %}
-<h1>This is the homepage</h1>
-<script src="./home.js"></script>
+<div class="container">
+	<h1>Live Editor</h1>
+	<textarea id="textarea" id="" cols="30" rows="10" class="form-control"></textarea>
+</div>
+
+
 {% endblock content %}
 
+{% block scripts%}
+<script src="/js/home.js"></script>
+{% endblock scripts%}
