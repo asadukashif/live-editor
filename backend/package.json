@@ -1,0 +1,19 @@
+{
+  "name": "live-editor-backend",
+  "version": "1.0.0",
+  "description": "The backend of the live editor",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShaderOX/live-editor.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShaderOX/live-editor/issues"
+  },
+  "homepage": "https://github.com/ShaderOX/live-editor#readme"
+}
