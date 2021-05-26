@@ -1,0 +1,13 @@
+.ql-tooltip-arrow { 
+    display: none;
+}
+
+.ql-toolbar { 
+    display: none;
+}
+
+.editor__main { 
+    font-family: 'Fira Code'!important;
+    border: 1px solid black;
+}
+ 

@@ -4,6 +4,8 @@
   "description": "The backend of the live editor",
   "main": "app.js",
   "scripts": {
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +17,13 @@
   "bugs": {
     "url": "https://github.com/ShaderOX/live-editor/issues"
   },
-  "homepage": "https://github.com/ShaderOX/live-editor#readme"
+  "homepage": "https://github.com/ShaderOX/live-editor#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "mongoose": "^5.12.11",
+    "socket.io": "^4.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
