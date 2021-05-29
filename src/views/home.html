@@ -1,12 +1,13 @@
 {% extends "base_template.html" %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 {% block bodyContent %}
-<h1>Hello {{ user.name }}!!</h1>
 
-<a href="/auth/google">Login using google</a>
-OR 
-<a href="/auth/logout">Logout</a>
+<video autoplay muted loop class="home__bRoll">
+  <source src="videos/b-roll2.mp4" type="video/mp4">
+</video>
 
-<a href="/document/">Create a document</a>
+{% include 'navbar.html' %}
+<div class="w-100 mx-auto" style="border-bottom: 1px solid rgba(255, 255, 255, 0.514);"></div>
 
 {% endblock %}
