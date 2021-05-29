@@ -1,4 +1,4 @@
-  let quill = new Quill("#editor", {
+let quill = new Quill("#editor", {
   // modules: {
   //   syntax: true, // Include syntax module
   //   toolbar: [["code-block"]], // Include button in toolbar
@@ -32,10 +32,10 @@ quill.on("text-change", (delta, oldDelta, source) => {
   socket.emit("send-changes", delta);
 });
 
-socket.on("receive-changes", (delta) => {
+socket.on("receive-changes", delta => {
   quill.updateContents(delta);
 });
 
-socket.on("load-document", (document) => {
+socket.on("load-document", document => {
   quill.setContents(document);
 });
