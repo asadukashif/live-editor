@@ -1,0 +1,12 @@
+{% extends "base_template.html" %}
+
+{% block bodyContent %}
+<h1>Hello {{ user.name }}!!</h1>
+
+<a href="/auth/google">Login using google</a>
+OR 
+<a href="/auth/logout">Logout</a>
+
+<a href="/document/">Create a document</a>
+
+{% endblock %}
