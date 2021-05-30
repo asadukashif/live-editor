@@ -1,32 +1,47 @@
-<nav class="navbar navbar-expand-lg navbar sticky-top navbar-dark  mx-auto">
-  <div class="container-fluid mx-3">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+<nav class="navbar navbar-expand-lg navbar sticky-top navbar-dark mx-auto">
+  <div class="container-fluid mx-5 ">
     <!-- <a class="navbar-brand" href="#"><img src="img/logo.png" height="32" width="34" alt="logo"></a> -->
-    <a class="navbar-brand" style="letter-spacing: 0.3rem;" href="#">Bocks Supremacy</a>
+    <a class="navbar-brand flex-nowrap" style="letter-spacing: 0.3rem;" href="#">Bocks Supremacy</a>
     {% if user %}
-    <span class="text-white mx-auto d-lg-block d-none text-lead" style="letter-spacing: 0.1rem;">{{ user.name }}</span>
+    <span class="text-white mx-auto d-lg-block d-none text-lead" style="letter-spacing: 0.1rem;">
+      {{ user.name }}</span>
     {% endif %}
-    <div>
+    <div class="m-sm-0">
       <button class="btn-toggle btn-outline-light btn d-lg-none" style="border: none;" type="button"
         data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
         aria-label="Toggle navigation">
         <span><i class="fas fa-bars"></i></span>
       </button>
-      <div class="collapse navbar-collapse d-lg-flex " style="width: 25vw;" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-between" style="width: 15vw;">
+          <li class=" nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
             <a class="btn btn-outline-light " href="https://github.com/ShaderOX/live-editor"><i
                 class="fab fa-github-square"></i> GitHub</a>
           </li>
-          <li class="nav-item">
-            {% if not user %}
-            <a class="nav-link active " href="/auth/google">Login</a>
-            {% else %}
-            <a class="nav-link active " href="/auth/logout">Logout</a>
-            {% endif %}
+          {% if not user %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Login
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="text-white dropdown-item" href="/auth/google">
+                  <img src="img/google.png" height="16" width="16" /> Google</a></li>
+              <li><a class="text-white dropdown-item" href="/auth/github">
+                  <img src="img/github.png" height="16" width="16" /> GitHub</a></li>
+            </ul>
           </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link active " href="/auth/logout">Logout</a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </div>
