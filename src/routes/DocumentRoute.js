@@ -5,8 +5,12 @@ router.get("/", (req, res) => {
   res.redirect(`/document/${v4()}`);
 });
 
+router.get("/new", (req, res) => {
+  res.render("document_new");
+});
+
 router.get("/:id/", (req, res) => {
   res.render("document.html");
-})
+});
 
 module.exports = router;
