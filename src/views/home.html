@@ -1,28 +1,53 @@
 {% extends "base_template.html" %}
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 {% block bodyContent %}
 
-<video autoplay muted loop class="home__bRoll">
-  <source src="videos/b-roll2.mp4" type="video/mp4">
+<video autoplay muted loop class="bg-b-roll ">
+  <source src="/videos/b-roll2.mp4" type="video/mp4">
 </video>
 
 {% include 'navbar.html' %}
-<div class="w-100 mx-auto" style="border-bottom: 1px solid rgba(255, 255, 255, 0.514);"></div>
-
 
 <div class="container getting-started">
-  <button class="btn btn-lg btn-outline-light">Start Coding <img src="img/code3.png" height="48" width="48"></button>
+  <a href="/document/new"
+    class="getting-started-btn btn btn-lg btn-outline-light h-auto d-flex align-items-center justify-center">
+    <i class="fas fa-terminal" style="margin-right: 1rem; color: green;"></i>
+    <div class="typewriter"> Start Coding ...</div>
+  </a>
 </div>
 
-<div class="row jumbotron text-white px-5 ">
+<div class="row jumbotron text-white p-5 ">
   <div class="jumbotron-text col-lg-6 col-md-12">
-    <h2 class="jumbotron-heading">Collaborative Coding</h2>
-    <p class="leading-3 text-center">Allows multiple developers around the globe to Collaborative and Connect</p>
+    <h2 class="display-3 jumbotron-heading ">Collaborative Coding</h2>
+    <p class="fs-5 text-center">Allows multiple developers around the globe to Collaborative and Connect</p>
   </div>
   <div class="col-lg-6 col-md-12 text-center">
-    <img src="img/team.png" class="img-fluid col-lg-6 col-sm-12">
+    <img src="/img/team.png" class="img-fluid col-lg-6 col-sm-12">
   </div>
 </div>
+
+<br />
+<br />
+<hr class="w-75 mx-auto" style="border: 2px solid white;" />
+<br />
+<br />
+
+<div class="row jumbotron text-white p-5 mt-5">
+  <div class="col-lg-6 col-md-12 text-center">
+    <img src="/img/processing.png" class="img-fluid col-lg-6 col-sm-12" style="max-height: 343px; max-width: 343px">
+  </div>
+  <div class="jumbotron-text col-lg-6 col-md-12 mt-5">
+    <h2 class="display-3 jumbotron-heading">Code Execution</h2>
+    <p class="fs-5 text-center">Allows users to run the code in any of our supported languages with a click of a button
+    </p>
+  </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+
+{% include 'footer.html' %}
 
 {% endblock %}
