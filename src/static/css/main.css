@@ -5,10 +5,18 @@
 }
 
 body {
-  /* background-color: blue; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: "Montserrat", sans-serif;
-  background-color: #000 !important
-  ;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(1, 29, 32),
+    rgb(0, 0, 0)
+  ) !important;
+}
+nav {
+  width: 100%;
 }
 
 nav,
@@ -56,7 +64,7 @@ nav,
   /* border: 1px solid rgba(255, 255, 255, 0.514); */
   /* background-color: rgba(0, 17, 17, 0.7);
   */
-  background: #000000;
+  background: #00000004;
   height: auto;
 }
 
@@ -76,14 +84,6 @@ nav,
   color: white;
   text-shadow: 2px 8px 40px white;
   font-weight: 600 !important;
-}
-
-footer {
-  background-color: rgba(0, 17, 17, 0.7);
-  bottom: 0;
-  top: auto;
-  margin-bottom: 0;
-  box-shadow: rgb(220, 220, 220) 0px -2px 10px;
 }
 
 .typewriter {
@@ -127,8 +127,11 @@ footer {
 }
 
 footer {
-  margin-top: 2.5rem;
+  margin-top: auto;
   background: #000000cc;
+  box-shadow: rgb(220, 220, 220) 0px -2px 10px;
+  /* margin-bottom: 0 !important; */
+  z-index: 10;
 }
 
 .heading {
