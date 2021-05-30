@@ -1,22 +1,75 @@
 {% extends "base_template.html" %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/document_new.css">
+{% endblock stylesheets %}
+
+
 {% block bodyContent %}
 
-<img class="bg-b-roll" src="/img/bg1.jpg">
-
+<div class="bg-gradient-custom"></div>
 {% include 'navbar.html' %}
 
-<div class="create-new mt-5">
-  <span class="heading text-white">New</span>
-
+<div class="container">
+  <div class="create-new mt-5">
+    <span class="heading text-white">New</span>
+    <br />
+    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <i class="fas fa-plus fa-1x"></i> Add a new document
+    </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-white" style="background-color: rgba(1, 33, 37, 0.39);">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add a new document</h5>
+            <button type="button" class="btn-outline-light bg-transparent " id="modalCloseBtn" style="border: none;"
+              data-bs-dismiss="modal" aria-label="Close"><i class="far fa-times-circle fa-2x"></i></button>
+          </div>
+          <div class="modal-body">
+            <form class="d-flex justify-content-between align-items-center">
+              <div class="input-group mb-3 ">
+                <div class="input-group-prepend">
+                  <label class="input-group-text bg-dark text-white" for="inputGroupSelect01">Language</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01">
+                  <option value="c">C</option>
+                  <option value="c++">C++</option>
+                  <option value="node">Node</option>
+                </select>
+              </div>
+              <input type="text" name="" class="form-control bg-dark text-white" placeholder="Name your document" id="">
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Send message</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="recents mt-5">
+    <span class="heading text-white">Recents</span>
+    <div class="cards-container row mt-3 ms-0 m-sm-0">
+      <div class="card text-light col-lg-4 col-md-6 mx-sm-0 ms-lg-2 me-lg-3 ms-md-2 me-md-3">
+        <div class="card-body">
+          <h5 class="card-title display-5 fs-3 font-monospace" style="letter-spacing: 0.1rem;">Card title</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the bulk of the card's
+            content.
+          </p>
+          <div class="d-flex justify-content-between align-items-end">
+            <a href="#" class="card-link btn btn-outline-light">Continue <i class="fas fa-code"></i></a>
+            <a href="#" class="card-link btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="recents mt-5">
-  <span class="heading text-white">Recent</span>
-
-</div>
-
-
+<div class="mt-5"></div>
 {% include 'footer.html' %}
 
 {% endblock %}
