@@ -9,8 +9,8 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-nav { 
-  background-color: rgba(45, 48, 51, 0.863)!important;
+nav, .dropdown-menu { 
+  background-color: #001111cc!important;
   z-index: 1;
 }
 
@@ -23,5 +23,38 @@ nav {
 }
 
 
+.getting-started { 
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.jumbotron {
+  height: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid rgba(255, 255, 255, 0.514);
+  background-color: rgba(0, 17, 17, 0.7);
+  height: auto;
+}
 
+.jumbotron-text {  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.jumbotron img { 
+  width: 90%;
+  max-width: 500px;
+}
+
+.jumbotron-heading { 
+  color: white;
+  text-shadow: 2px 8px 40px white;
+}
