@@ -1,0 +1,39 @@
+.bg-gradient-custom {
+  position: fixed;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(0, 0, 0),
+    rgb(1, 50, 56),
+    rgb(0, 0, 0)
+  ) !important;
+  z-index: -99;
+}
+
+.card {
+  background-color: rgba(6, 13, 19, 0.315) !important;
+  box-shadow: rgb(220, 220, 220) -2px 2px 4px 0px;
+  margin: 0 2rem 0 1rem !important;
+  width: 25.5rem !important;
+  height: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    margin-left: 0.3rem !important ;
+    margin-right: 0.3rem !important  ;
+  }
+}
+
+#exampleModal {
+  background-color: rgba(0, 0, 0, 0.405);
+}
+
+#modalCloseBtn {
+  outline: none;
+  border-radius: 50%;
+  color: white;
+}
+#modalCloseBtn:hover {
+}

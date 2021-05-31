@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon --ext html,js,css src/app.js "
+    "start": "nodemon --ext html,js,css src/app.js ",
+    "deploy": "node src/app.js"
   },
   "author": "ShaderOX, green-mint",
   "license": "MIT",
