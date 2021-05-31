@@ -1,18 +1,288 @@
-{% extends "base_template.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Collaborative Ace Editor</title>
 
-{% block stylesheets %}
-<link rel="stylesheet" href="/css/document.css">
-<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
-{% endblock %}
+    <script type="text/javascript" src="/js/codemirror.js"></script>
+    <script type="text/javascript" src="/js/mark-selection.js"></script>
+    <script type="text/javascript" src="/js/sharedb-client.min.js"></script>
+    <script type="text/javascript" src="/js/ot-text.min.js"></script>
+    <script type="text/javascript" src="/js/socket.io/socket.io.min.js"></script>
 
-{% block bodyContent %}
-<div id="editor" style="height: 200px;"></div>
-{% endblock %}
+    <link rel="stylesheet" href="/css/codemirror.css" />
+    <style type="text/css">
+        html, body, #wrapper {
+            height: 100%;
+            font-family: helvetica, arial, sans-serif;
+            overflow: hidden;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrapper {
+            display: flex;
+            max-width: 1500px;
+            margin: auto;
+            flex-direction: column;
+            font-family: sans-serif;
+        }
+
+        #editor {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        #users {
+            list-style: none;
+            margin: 0;
+        }
+
+        #users li {
+            width: 25px;
+            height: 25px;
+            margin: 2px;
+            color: white;
+            float: right;
+            text-align: center;
+            line-height: 25px;
+        }
+
+        .CodeMirror {
+            height: 100%;
+        }
+
+        @keyframes cursorThrob {
+            0% { opacity: 0.5 }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Code Mirror</h1>
+        <ul id="users"></ul>
+        <div id="editor">
+            <textarea></textarea>
+        </div>
+    </div>
+    
+    <script>
+        // Indicates whether or not we should not watch
+        // changes emitted by the editor due to changes made
+        // via operations
+        let stopWatch = false
+
+        // Initialize Editor //
+        const ed = CodeMirror.fromTextArea(document.querySelector('textarea'), { lineNumbers: true });
+        
+        const sharews = new WebSocket('ws://127.0.0.1:8080')
+        const shareconn = new ShareDB.Connection(sharews)
+        const sharedoc = shareconn.get('docs', 'saad_test')
+        const docMatches = window.location.href.match(/\?doc=([a-zA-Z1-9]+)/)
+        // Create operations for sharedb based on the editor
+        ed.on('change', (ed, chg) => {
+            if (stopWatch) return
+
+            const stindex = ed.indexFromPos(chg.from)
+            const delta = chg.removed.join('\n').length
+            const addedText = chg.text.join('\n')
 
 
+            if (delta) sharedoc.submitOp([stindex, { d: delta }])
+            if (addedText) sharedoc.submitOp([stindex, addedText])
+        })
 
-{% block scripts %}
-<script src="https://cdn.quilljs.com/1.3.7/quill.js"></script>
-<script src="/js/socket.io/socket.io.min.js"></script>
-<script src="/js/document.js"></script>
-{% endblock %}
+        // Update the range in other editors when the selection changes
+        ed.on('cursorActivity', e => {
+            const stPos = ed.getCursor('start')
+            const edPos = ed.getCursor('end')
+            const hdPos = ed.getCursor('head')
+
+            const stindex = ed.indexFromPos(stPos)
+            const edindex = ed.indexFromPos(edPos)
+            const hdindex = ed.indexFromPos(hdPos)
+            const prefixed = hdindex === stindex && stindex !== edindex
+
+            io.emit('anchor-update', { stindex, edindex, prefixed })
+        })
+
+        // ShareDB init //
+        
+        // const sharedoc = shareconn.get('docs', docMatches ? docMatches[1] : 'default')
+        
+        // Listen for changes to the document
+        sharedoc.subscribe(d => {
+            stopWatch = true
+            ed.setValue(sharedoc.data)
+            ed.setCursor(0,0)
+            ed.focus()
+            stopWatch = false
+        })
+        sharedoc.on('op', (op, mine) => {
+            if (mine) return
+            const index = op.length == 2 ? op[0] : 0
+            const data = op.length === 2 ? op[1] : op[0]
+
+            // insert operation if the op is of the form
+            // op [<index>, <string>]
+            if (typeof data === 'string') {
+                const pos = ed.posFromIndex(index)
+
+                stopWatch = true
+                ed.replaceRange(data, pos, pos)
+                stopWatch = false
+
+            // otherwise we assume its a deletion of the form
+            // op [<index>, { d: <char count> }]
+            } else {
+                const delCt = data.d
+                const stPos = ed.posFromIndex(index)
+                const edPos = ed.posFromIndex(index + delCt)
+                const range = { start: stPos, end: edPos }
+
+                stopWatch = true
+                ed.replaceRange('', stPos, edPos)
+                stopWatch = false
+            }
+        })
+
+        // ShareDB-Independent update events
+        const addName = (id, name) => {
+            const userslist = document.querySelector('#users')
+            const usericon = document.createElement('li')
+            usericon.classList.add(`u-${id}`)
+            usericon.innerHTML = name
+            userslist.appendChild(usericon)
+
+            const color = idToColor(id)
+            const styleTag = document.createElement('style')
+            styleTag.id = `style-${id}`
+            styleTag.innerHTML = `
+                .u-${id} { background-color: ${color}; }
+                .CodeMirror-line .u-${id}                   { background-color: ${hexToRgbaStyle(color, 0.35)}; }
+                .CodeMirror-line .u-${id}.cursor            { opacity: 1; }
+                .CodeMirror-line .u-${id}.cursor.left       { border-left: 2px solid ${color}; }
+                .CodeMirror-line .u-${id}.cursor.right      { border-right: 2px solid ${color}; }
+                .CodeMirror-line .u-${id}.empty             { background-color: transparent; }
+
+            `
+            document.querySelector('head').appendChild(styleTag)
+        }
+
+        const anchorMap = {}
+        const setAnchor = (id, anchor) => {
+            if (id in anchorMap) {
+                anchorMap[id].forEach(m => m.clear())
+                delete anchorMap[id]
+            }
+
+            // Whether or not the cursor is actually at the beginning
+            // or end of the selection
+            let emptyClass = ''
+            let stindex = anchor.stindex
+            const edindex = anchor.edindex
+
+            // Add selection
+            let stPos, edPos, range
+            anchorMap[id] = []
+            
+            if(stindex !== edindex) {
+                stPos = ed.posFromIndex(stindex)
+                edPos = ed.posFromIndex(edindex)
+
+                anchorMap[id].push(ed.markText(stPos, edPos, { className: `u-${id}` }))
+            }
+
+            if (stindex === edindex) {
+                stindex = Math.max(0, stindex - 1)
+                emptyClass = 'empty'
+            }
+
+            // Add cursor
+            const index = anchor.prefixed ? stindex : edindex
+            stPos = ed.posFromIndex(index + (anchor.prefixed ? 0 : -1))
+            edPos = ed.posFromIndex(index + (anchor.prefixed ? 1 : 0))
+
+            anchorMap[id].push(ed.markText(stPos, edPos, { className: `u-${id} ${emptyClass} cursor ${anchor.prefixed ? "left" : "right"}` }))
+        }
+
+        const removeId = id => {
+            document.querySelector(`#users li.u-${id}`).remove()
+            document.querySelector(`#style-${id}`).remove()
+            if (id in anchorMap) {
+                anchorMap[id].forEach(m => m.clear())
+                delete anchorMap[id]
+            }
+        }
+
+        const idToColor = id => {
+            let total = 0
+            for (let c of id) total += c.charCodeAt(0)
+
+            let hex = total.toString(16)
+            while(hex.length < 3) hex += hex[hex.length - 1]
+            hex = hex.substr(0, 3)
+
+            let color = '#'
+            for (let c of hex) color += `${c}0`
+
+            return color
+        }
+
+        const hexToRgbaStyle = (hex, opacity) => {
+            hex = hex.replace('#', '')
+            let r, g, b, den
+            if (hex.length === 3) {
+                r = hex[0] + hex[0]
+                g = hex[1] + hex[1]
+                b = hex[2] + hex[2]
+            } else {
+                r = hex.substr(0, 2)
+                g = hex.substr(2, 2)
+                b = hex.substr(4, 2)
+            }
+
+            r = parseInt(r, 16)
+            g = parseInt(g, 16)
+            b = parseInt(b, 16)
+
+            return `rgba(${r},${g},${b},${opacity})`
+        }
+
+        const clearAll = () => {
+            for (let key in anchorMap) removeId(key)
+        }
+
+        // Websocket Initialization
+        io = io()
+        io.on('connect', () => {
+            io.on('disconnect', () => clearAll())
+
+            io.once('initialize', e => {
+                for (let id in e.anchors)   io.id !== id && setAnchor(id, e.anchors[id])
+                for (let id in e.names)     io.id !== id && addName(id, e.names[id])
+            })
+            io.on('anchor-update', e => {
+                if (io.id === e.id) return
+
+                setAnchor(e.id, e.anchor)
+            })
+            io.on('id-join', e => {
+                if (io.id === e.id) return
+
+                addName(e.id, e.name)
+                setAnchor(e.id, e.anchor)
+            })
+            io.on('id-left', e => {
+                if (io.id === e.id) return
+
+                removeId(e.id)
+            })
+        })
+    </script>
+</body>
+</html>

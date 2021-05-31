@@ -12,16 +12,22 @@
     "nodemon": "^2.0.7"
   },
   "dependencies": {
+    "ace-builds": "^1.4.12",
     "body-parser": "^1.19.0",
+    "codemirror": "^5.61.1",
     "connect-mongo": "^4.4.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mongoose": "^5.12.11",
     "nunjucks": "^3.2.3",
+    "ot-text": "^1.0.2",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
+    "sharedb": "^1.8.1",
+    "sharedb-mongo": "*",
     "socket.io": "^4.1.2",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "websocket-json-stream": "^0.0.3"
   }
 }
