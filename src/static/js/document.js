@@ -1,41 +1,33 @@
-let quill = new Quill("#editor", {
-  // modules: {
-  //   syntax: true, // Include syntax module
-  //   toolbar: [["code-block"]], // Include button in toolbar
-  // },
-  theme: "snow",
-});
+var ReconnectingWebSocket = require('reconnecting-websocket');
+var sharedb = require('sharedb/lib/client');
+var richText = require('rich-text');
+var Quill = require('quill');
+sharedb.types.register(richText.type);
+// Open WebSocket connection to ShareDB server
+var socket = new ReconnectingWebSocket('ws://' + window.location.host);
+var connection = new sharedb.Connection(socket);
 
-const SAVE_INTERVAL_MS = 3000;
+// For testing reconnection
+window.disconnect = function() {
+  connection.close();
+};
+window.connect = function() {
+  var socket = new ReconnectingWebSocket('ws://' + window.location.host);
+  connection.bindToSocket(socket);
+};
 
-let documentID = window.location.href.split("/")[4];
-
-let socket = io();
-
-// Why did this not work??
-// socket.on("connection", socket => {
-//   console.log("Connected to server");
-//   socket.emit("get-document", documentID);
-// })
-
-socket.emit("get-document", documentID);
-
-const interval = setInterval(() => {
-  console.log("Emiting the save doc event");
-  socket.emit("save-document", quill.getContents());
-}, SAVE_INTERVAL_MS);
-
-socket.emit("save-changes", quill.getContents());
-
-quill.on("text-change", (delta, oldDelta, source) => {
-  if (source != "user") return;
-  socket.emit("send-changes", delta);
-});
-
-socket.on("receive-changes", delta => {
-  quill.updateContents(delta);
-});
-
-socket.on("load-document", document => {
-  quill.setContents(document);
+// Create local Doc instance mapped to 'examples' collection document with id 'richtext'
+var doc = connection.get('examples', 'richtext');
+doc.subscribe(function(err) {
+  if (err) throw err;
+  var quill = new Quill('#editor', {theme: 'snow'});
+  quill.setContents(doc.data);
+  quill.on('text-change', function(delta, oldDelta, source) {
+    if (source !== 'user') return;
+    doc.submitOp(delta, {source: quill});
+  });
+  doc.on('op', function(op, source) {
+    if (source === quill) return;
+    quill.updateContents(op);
+  });
 });
