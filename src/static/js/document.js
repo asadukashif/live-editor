@@ -1,8 +1,13 @@
+hljs.configure({
+  // optionally configure hljs
+  languages: ["javascript", "ruby", "python"],
+});
+
 let quill = new Quill("#editor", {
-  // modules: {
-  //   syntax: true, // Include syntax module
-  //   toolbar: [["code-block"]], // Include button in toolbar
-  // },
+  modules: {
+    syntax: true, // Include syntax module
+    toolbar: [["code-block"]], // Include button in toolbar
+  },
   theme: "snow",
 });
 
