@@ -7,14 +7,14 @@ sharedb.types.register(richText.type);
 var socket = new ReconnectingWebSocket('ws://' + window.location.host);
 var connection = new sharedb.Connection(socket);
 
-// For testing reconnection
-window.disconnect = function() {
-  connection.close();
-};
-window.connect = function() {
-  var socket = new ReconnectingWebSocket('ws://' + window.location.host);
-  connection.bindToSocket(socket);
-};
+// // For testing reconnection
+// window.disconnect = function() {
+//   connection.close();
+// };
+// window.connect = function() {
+//   var socket = new ReconnectingWebSocket('ws://' + window.location.host);
+//   connection.bindToSocket(socket);
+// };
 
 // Create local Doc instance mapped to 'examples' collection document with id 'richtext'
 var doc = connection.get('examples', 'richtext');
