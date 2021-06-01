@@ -9,7 +9,7 @@
 {% include 'navbar.html' %}
 
 <div class="container getting-started">
-  <a href="/document/new"
+  <a href="/document/getting-started"
     class="getting-started-btn btn btn-lg btn-outline-light h-auto d-flex align-items-center justify-center">
     <i class="fas fa-terminal" style="margin-right: 1rem; color: green;"></i>
     <div class="typewriter"> Start Coding ...</div>
@@ -49,5 +49,9 @@
 <br />
 
 {% include 'footer.html' %}
+
+{% block scripts %}
+<script src="/js/home.js"></script>
+{% endblock scripts %}
 
 {% endblock %}

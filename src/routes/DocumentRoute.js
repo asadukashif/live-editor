@@ -2,16 +2,16 @@ const router = require("express").Router();
 const { v4 } = require("uuid");
 
 router.get("/", (req, res) => {
-  res.redirect(`/document/${v4()}`);
+  res.redirect(`/document/new/${v4()}`);
 });
 
-router.get("/new", (req, res) => {
-  res.render("document_new", {
+router.get("/getting-started", (req, res) => {
+  res.render("document_new.html", {
     user: req.user,
   });
 });
 
-router.get("/:id/", (req, res) => {
+router.get("new/:id/", (req, res) => {
   res.render("document.html");
 });
 
