@@ -3,7 +3,7 @@ const { fetchDoc, createDoc } = require("../middleware/document");
 const { v4 } = require("uuid");
 
 router.get("/", (req, res) => {
-  res.redirect(`/document/${v4()}`);
+  res.redirect(`/document/new/${v4()}`);
 });
 
 router.get("/new", createDoc ,(req, res) => {
