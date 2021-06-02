@@ -24,17 +24,14 @@ module.exports = {
     doc.fetch(function(err) {
       if (err) throw err;
       if (doc.type === null) {
-        console.log("Creating Document!");
         doc.create([{insert: 'Hi!'}], 'rich-text');
         //res.status(404).send(`No document with id ${docid} was found`);
-        console.log("Done creating doc");
         req.params.docid = docid; 
       }
       else {
         console.log("Document was already created");
         return;
       }
-      console.log("Going to the next func");
       next();
     });
   }

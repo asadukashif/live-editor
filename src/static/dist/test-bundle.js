@@ -29971,25 +29971,31 @@ var sharedb = require('sharedb/lib/client');
 var richText = require('rich-text');
 var Quill = require('quill');
 sharedb.types.register(richText.type);
-// Open WebSocket connection to ShareDB server
-var socket = new ReconnectingWebSocket('ws://' + window.location.host);
-var connection = new sharedb.Connection(socket);
 
-// // For testing reconnection
-// window.disconnect = function() {
-//   connection.close();
-// };
-// window.connect = function() {
-//   var socket = new ReconnectingWebSocket('ws://' + window.location.host);
-//   connection.bindToSocket(socket);
-// };
+
+// hljs.configure({
+//   // optionally configure hljs
+//   languages: ["javascript", "ruby", "python"],
+// });
+
+let quill = new Quill("#editor", {
+  // modules: {
+  //   syntax: true, // Include syntax module
+  //   toolbar: [["code-block"]], // Include button in toolbar
+  // },
+  theme: "snow",
+});
+
+let socket = new ReconnectingWebSocket('ws://' + window.location.host);
+let connection = new sharedb.Connection(socket);
+
+
 let docid = window.location.href.split('/')[4]
 console.log(docid);
-// Create local Doc instance mapped to 'examples' collection document with id 'richtext'
+
 var doc = connection.get('examples', docid);
 doc.subscribe(function(err) {
   if (err) throw err;
-  var quill = new Quill('#editor', {theme: 'snow'});
   quill.setContents(doc.data);
   quill.on('text-change', function(delta, oldDelta, source) {
     if (source !== 'user') return;
