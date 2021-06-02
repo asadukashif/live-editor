@@ -24,6 +24,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mongoose": "^5.12.11",
+    "node-fetch": "^2.6.1",
     "nunjucks": "^3.2.3",
     "ot-text": "^1.0.2",
     "passport": "^0.4.1",

@@ -5611,7 +5611,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 })));
 
 }).call(this)}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("timers").setImmediate)
-},{"_process":15,"timers":45}],2:[function(require,module,exports){
+},{"_process":16,"timers":46}],2:[function(require,module,exports){
 'use strict'
 
 exports.byteLength = byteLength
@@ -12632,6 +12632,34 @@ module.exports = isEqual;
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],11:[function(require,module,exports){
+(function (global){(function (){
+"use strict";
+
+// ref: https://github.com/tc39/proposal-global
+var getGlobal = function () {
+	// the only reliable means to get the global object is
+	// `Function('return this')()`
+	// However, this causes CSP violations in Chrome apps.
+	if (typeof self !== 'undefined') { return self; }
+	if (typeof window !== 'undefined') { return window; }
+	if (typeof global !== 'undefined') { return global; }
+	throw new Error('unable to locate global object');
+}
+
+var global = getGlobal();
+
+module.exports = exports = global.fetch;
+
+// Needed for TypeScript and Webpack.
+if (global.fetch) {
+	exports.default = global.fetch.bind(global);
+}
+
+exports.Headers = global.Headers;
+exports.Request = global.Request;
+exports.Response = global.Response;
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],12:[function(require,module,exports){
 // These methods let you build a transform function from a transformComponent
 // function for OT types like JSON0 in which operations are lists of components
 // and transforming them requires N^2 work. I find it kind of nasty that I need
@@ -12711,7 +12739,7 @@ function bootstrapTransform(type, transformComponent, checkValidOp, append) {
   };
 };
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 // Only the JSON type is exported, because the text type is deprecated
 // otherwise. (If you want to use it somewhere, you're welcome to pull it out
 // into a separate module that json0 can depend on).
@@ -12720,7 +12748,7 @@ module.exports = {
   type: require('./json0')
 };
 
-},{"./json0":13}],13:[function(require,module,exports){
+},{"./json0":14}],14:[function(require,module,exports){
 /*
  This is the implementation of the JSON OT type.
 
@@ -13385,7 +13413,7 @@ json.registerSubtype(text);
 module.exports = json;
 
 
-},{"./bootstrapTransform":11,"./text0":14}],14:[function(require,module,exports){
+},{"./bootstrapTransform":12,"./text0":15}],15:[function(require,module,exports){
 // DEPRECATED!
 //
 // This type works, but is not exported. Its included here because the JSON0
@@ -13643,7 +13671,7 @@ text.invert = function(op) {
 
 require('./bootstrapTransform')(text, transformComponent, checkValidOp, append);
 
-},{"./bootstrapTransform":11}],15:[function(require,module,exports){
+},{"./bootstrapTransform":12}],16:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -13829,7 +13857,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -13926,7 +13954,7 @@ var AttributeMap;
 })(AttributeMap || (AttributeMap = {}));
 exports.default = AttributeMap;
 
-},{"lodash.clonedeep":9,"lodash.isequal":10}],17:[function(require,module,exports){
+},{"lodash.clonedeep":9,"lodash.isequal":10}],18:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -14332,7 +14360,7 @@ var Delta = /** @class */ (function () {
 }());
 module.exports = Delta;
 
-},{"./AttributeMap":16,"./Op":19,"fast-diff":6,"lodash.clonedeep":9,"lodash.isequal":10}],18:[function(require,module,exports){
+},{"./AttributeMap":17,"./Op":20,"fast-diff":6,"lodash.clonedeep":9,"lodash.isequal":10}],19:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -14436,7 +14464,7 @@ var Iterator = /** @class */ (function () {
 }());
 exports.default = Iterator;
 
-},{"./Op":19}],19:[function(require,module,exports){
+},{"./Op":20}],20:[function(require,module,exports){
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -14464,7 +14492,7 @@ var Op;
 })(Op || (Op = {}));
 exports.default = Op;
 
-},{"./Iterator":18}],20:[function(require,module,exports){
+},{"./Iterator":19}],21:[function(require,module,exports){
 (function (Buffer){(function (){
 /*!
  * Quill Editor v1.3.7
@@ -26029,7 +26057,7 @@ module.exports = __webpack_require__(63);
 /******/ ])["default"];
 });
 }).call(this)}).call(this,require("buffer").Buffer)
-},{"buffer":3}],21:[function(require,module,exports){
+},{"buffer":3}],22:[function(require,module,exports){
 'use strict';
 
 /*! *****************************************************************************
@@ -26620,10 +26648,10 @@ var ReconnectingWebSocket = /** @class */ (function () {
 
 module.exports = ReconnectingWebSocket;
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 module.exports = require('./lib/type');
 
-},{"./lib/type":23}],23:[function(require,module,exports){
+},{"./lib/type":24}],24:[function(require,module,exports){
 var Delta = require('quill-delta');
 
 
@@ -26695,7 +26723,7 @@ module.exports = {
   }
 };
 
-},{"quill-delta":17}],24:[function(require,module,exports){
+},{"quill-delta":18}],25:[function(require,module,exports){
 var Doc = require('./doc');
 var Query = require('./query');
 var Presence = require('./presence/presence');
@@ -27497,7 +27525,7 @@ Connection.prototype._handlePresenceRequest = function(error, message) {
   if (presence) presence._broadcastAllLocalPresence(error, message);
 };
 
-},{"../emitter":37,"../error":38,"../logger":39,"../types":43,"../util":44,"./doc":25,"./presence/doc-presence":27,"./presence/presence":30,"./query":33,"./snapshot-request/snapshot-timestamp-request":35,"./snapshot-request/snapshot-version-request":36}],25:[function(require,module,exports){
+},{"../emitter":38,"../error":39,"../logger":40,"../types":44,"../util":45,"./doc":26,"./presence/doc-presence":28,"./presence/presence":31,"./query":34,"./snapshot-request/snapshot-timestamp-request":36,"./snapshot-request/snapshot-version-request":37}],26:[function(require,module,exports){
 var emitter = require('../emitter');
 var logger = require('../logger');
 var ShareDBError = require('../error');
@@ -28520,7 +28548,7 @@ Doc.prototype._clearInflightOp = function(err) {
   if (err && !called) return this.emit('error', err);
 };
 
-},{"../emitter":37,"../error":38,"../logger":39,"../types":43,"../util":44,"fast-deep-equal":5}],26:[function(require,module,exports){
+},{"../emitter":38,"../error":39,"../logger":40,"../types":44,"../util":45,"fast-deep-equal":5}],27:[function(require,module,exports){
 exports.Connection = require('./connection');
 exports.Doc = require('./doc');
 exports.Error = require('../error');
@@ -28528,7 +28556,7 @@ exports.Query = require('./query');
 exports.types = require('../types');
 exports.logger = require('../logger');
 
-},{"../error":38,"../logger":39,"../types":43,"./connection":24,"./doc":25,"./query":33}],27:[function(require,module,exports){
+},{"../error":39,"../logger":40,"../types":44,"./connection":25,"./doc":26,"./query":34}],28:[function(require,module,exports){
 var Presence = require('./presence');
 var LocalDocPresence = require('./local-doc-presence');
 var RemoteDocPresence = require('./remote-doc-presence');
@@ -28556,7 +28584,7 @@ DocPresence.prototype._createRemotePresence = function(id) {
   return new RemoteDocPresence(this, id);
 };
 
-},{"./local-doc-presence":28,"./presence":30,"./remote-doc-presence":31}],28:[function(require,module,exports){
+},{"./local-doc-presence":29,"./presence":31,"./remote-doc-presence":32}],29:[function(require,module,exports){
 var LocalPresence = require('./local-presence');
 var ShareDBError = require('../../error');
 var ERROR_CODE = ShareDBError.CODES;
@@ -28672,7 +28700,7 @@ LocalDocPresence.prototype._message = function() {
   return message;
 };
 
-},{"../../error":38,"./local-presence":29}],29:[function(require,module,exports){
+},{"../../error":39,"./local-presence":30}],30:[function(require,module,exports){
 var emitter = require('../../emitter');
 var util = require('../../util');
 
@@ -28753,7 +28781,7 @@ LocalPresence.prototype._callbackOrEmit = function(error, callback) {
   if (error) this.emit('error', error);
 };
 
-},{"../../emitter":37,"../../util":44}],30:[function(require,module,exports){
+},{"../../emitter":38,"../../util":45}],31:[function(require,module,exports){
 var emitter = require('../../emitter');
 var LocalPresence = require('./local-presence');
 var RemotePresence = require('./remote-presence');
@@ -28926,7 +28954,7 @@ Presence.prototype._callEachOrEmit = function(callbacks, error) {
   if (!called && error) this.emit('error', error);
 };
 
-},{"../../emitter":37,"../../util":44,"./local-presence":29,"./remote-presence":32,"async":1,"hat":7}],31:[function(require,module,exports){
+},{"../../emitter":38,"../../util":45,"./local-presence":30,"./remote-presence":33,"async":1,"hat":7}],32:[function(require,module,exports){
 var RemotePresence = require('./remote-presence');
 var ot = require('../../ot');
 
@@ -29079,7 +29107,7 @@ RemoteDocPresence.prototype._cacheOp = function(op, isOwnOp) {
   }
 };
 
-},{"../../ot":41,"./remote-presence":32}],32:[function(require,module,exports){
+},{"../../ot":42,"./remote-presence":33}],33:[function(require,module,exports){
 var util = require('../../util');
 
 module.exports = RemotePresence;
@@ -29105,7 +29133,7 @@ RemotePresence.prototype.destroy = function(callback) {
   if (callback) util.nextTick(callback);
 };
 
-},{"../../util":44}],33:[function(require,module,exports){
+},{"../../util":45}],34:[function(require,module,exports){
 var emitter = require('../emitter');
 var util = require('../util');
 
@@ -29306,7 +29334,7 @@ Query.prototype._handleExtra = function(extra) {
   this.emit('extra', extra);
 };
 
-},{"../emitter":37,"../util":44}],34:[function(require,module,exports){
+},{"../emitter":38,"../util":45}],35:[function(require,module,exports){
 var Snapshot = require('../../snapshot');
 var emitter = require('../../emitter');
 
@@ -29362,7 +29390,7 @@ SnapshotRequest.prototype._handleResponse = function(error, message) {
   this.callback(null, snapshot);
 };
 
-},{"../../emitter":37,"../../snapshot":42}],35:[function(require,module,exports){
+},{"../../emitter":38,"../../snapshot":43}],36:[function(require,module,exports){
 var SnapshotRequest = require('./snapshot-request');
 var util = require('../../util');
 
@@ -29390,7 +29418,7 @@ SnapshotTimestampRequest.prototype._message = function() {
   };
 };
 
-},{"../../util":44,"./snapshot-request":34}],36:[function(require,module,exports){
+},{"../../util":45,"./snapshot-request":35}],37:[function(require,module,exports){
 var SnapshotRequest = require('./snapshot-request');
 var util = require('../../util');
 
@@ -29418,7 +29446,7 @@ SnapshotVersionRequest.prototype._message = function() {
   };
 };
 
-},{"../../util":44,"./snapshot-request":34}],37:[function(require,module,exports){
+},{"../../util":45,"./snapshot-request":35}],38:[function(require,module,exports){
 var EventEmitter = require('events').EventEmitter;
 
 exports.EventEmitter = EventEmitter;
@@ -29430,7 +29458,7 @@ function mixin(Constructor) {
   }
 }
 
-},{"events":4}],38:[function(require,module,exports){
+},{"events":4}],39:[function(require,module,exports){
 function ShareDBError(code, message) {
   this.code = code;
   this.message = message || '';
@@ -29504,12 +29532,12 @@ ShareDBError.CODES = {
 
 module.exports = ShareDBError;
 
-},{}],39:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 var Logger = require('./logger');
 var logger = new Logger();
 module.exports = logger;
 
-},{"./logger":40}],40:[function(require,module,exports){
+},{"./logger":41}],41:[function(require,module,exports){
 var SUPPORTED_METHODS = [
   'info',
   'warn',
@@ -29537,7 +29565,7 @@ Logger.prototype.setMethods = function(overrides) {
   });
 };
 
-},{}],41:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 // This contains the master OT functions for the database. They look like
 // ot-types style operational transform functions, but they're a bit different.
 // These functions understand versions and can deal with out of bound create &
@@ -29761,7 +29789,7 @@ exports.transformPresence = function(presence, op, isOwnOp) {
   presence.v++;
 };
 
-},{"./error":38,"./types":43,"./util":44}],42:[function(require,module,exports){
+},{"./error":39,"./types":44,"./util":45}],43:[function(require,module,exports){
 module.exports = Snapshot;
 function Snapshot(id, version, type, data, meta) {
   this.id = id;
@@ -29771,7 +29799,7 @@ function Snapshot(id, version, type, data, meta) {
   this.m = meta;
 }
 
-},{}],43:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 
 exports.defaultType = require('ot-json0').type;
 
@@ -29784,7 +29812,7 @@ exports.register = function(type) {
 
 exports.register(exports.defaultType);
 
-},{"ot-json0":12}],44:[function(require,module,exports){
+},{"ot-json0":13}],45:[function(require,module,exports){
 (function (process){(function (){
 
 exports.doNothing = doNothing;
@@ -29886,7 +29914,7 @@ exports.nextTick = function(callback) {
 };
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":15}],45:[function(require,module,exports){
+},{"_process":16}],46:[function(require,module,exports){
 (function (setImmediate,clearImmediate){(function (){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -29965,11 +29993,12 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this)}).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":15,"timers":45}],46:[function(require,module,exports){
-var ReconnectingWebSocket = require('reconnecting-websocket');
-var sharedb = require('sharedb/lib/client');
-var richText = require('rich-text');
-var Quill = require('quill');
+},{"process/browser.js":16,"timers":46}],47:[function(require,module,exports){
+let ReconnectingWebSocket = require('reconnecting-websocket');
+let sharedb = require('sharedb/lib/client');
+let richText = require('rich-text');
+let Quill = require('quill');
+let fetch = require('node-fetch')
 sharedb.types.register(richText.type);
 
 
@@ -30007,4 +30036,30 @@ doc.subscribe(function(err) {
   });
 });
 
-},{"quill":20,"reconnecting-websocket":21,"rich-text":22,"sharedb/lib/client":26}]},{},[46]);
+const data = { username: 'example' };
+
+let runButton = document.getElementById("run-code");
+runButton.addEventListener("click", () => {
+  const data = { code: quill.getContents().ops[0].insert};
+  console.log(data);
+  
+  fetch('/run', {
+    method: 'POST', // or 'PUT'
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+
+})
+
+
+
+},{"node-fetch":11,"quill":21,"reconnecting-websocket":22,"rich-text":23,"sharedb/lib/client":27}]},{},[47]);

@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 3000;
 //passport config
 require("./passport")(passport);
 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set("view engine", "html");
@@ -44,7 +45,7 @@ nunjucks.configure(["src/views/", "src/static/"], {
 app.use("/", require("../routes/HomeRoute"));
 app.use("/document", require("../routes/DocumentRoute"));
 app.use("/auth", require("../routes/AuthRoute"));
-
+app.use("/run", require("../routes/RunRoute"));
 
 
 module.exports.app = app;

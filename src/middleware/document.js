@@ -25,7 +25,7 @@ module.exports = {
       if (err) throw err;
       if (doc.type === null) {
         doc.create([{insert: 'Hi!'}], 'rich-text');
-        
+
         //res.status(404).send(`No document with id ${docid} was found`);
         req.params.docid = docid; 
       }
