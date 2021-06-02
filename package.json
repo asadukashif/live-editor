@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon --ext html,js,css src/app.js ",
+    "start": "nodemon --ext html,js,css src/server.js ",
     "build": "browserify src/static/js/document.js -o src/static/dist/test-bundle.js",
-    "deploy": "node src/app.js"
+    "deploy": "node src/server.js"
   },
   "author": "ShaderOX, green-mint",
   "license": "MIT",
