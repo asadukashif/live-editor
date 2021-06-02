@@ -15,9 +15,10 @@ var connection = new sharedb.Connection(socket);
 //   var socket = new ReconnectingWebSocket('ws://' + window.location.host);
 //   connection.bindToSocket(socket);
 // };
-
+let docid = window.location.href.split('/')[4]
+console.log(docid);
 // Create local Doc instance mapped to 'examples' collection document with id 'richtext'
-var doc = connection.get('examples', 'richtext');
+var doc = connection.get('examples', docid);
 doc.subscribe(function(err) {
   if (err) throw err;
   var quill = new Quill('#editor', {theme: 'snow'});
