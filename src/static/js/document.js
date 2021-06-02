@@ -4,6 +4,12 @@ var sharedb = require("sharedb/lib/client");
 var richText = require("rich-text");
 // var Quill = require("quill");
 const Split = require("split.js");
+let ReconnectingWebSocket = require("reconnecting-websocket");
+let sharedb = require("sharedb/lib/client");
+let richText = require("rich-text");
+let Quill = require("quill");
+let fetch = require("node-fetch");
+sharedb.types.register(richText.type);
 
 sharedb.types.register(richText.type);
 
@@ -58,4 +64,26 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.querySelector(".gutter").innerHTML += '<div class="split"></div>';
+});
+const data = { username: "example" };
+
+let runButton = document.getElementById("run-code");
+runButton.addEventListener("click", () => {
+  const data = { code: quill.getContents().ops[0].insert };
+  console.log(data);
+
+  fetch("/run", {
+    method: "POST", // or 'PUT'
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log("Success:", data);
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
 });

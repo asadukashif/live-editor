@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon --ext html,js,css src/app.js ",
+    "start": "nodemon --ext html,js,css src/server.js ",
     "build": "browserify src/static/js/document.js -o src/static/dist/test-bundle.js",
     "deploy": "node src/app.js",
     "watch": "nodemon --watch src/static/js/document.js --exec npm run build"
@@ -26,6 +26,7 @@
     "express-session": "^1.17.2",
     "highlightjs": "^9.16.2",
     "mongoose": "^5.12.11",
+    "node-fetch": "^2.6.1",
     "nunjucks": "^3.2.3",
     "ot-text": "^1.0.2",
     "passport": "^0.4.1",
