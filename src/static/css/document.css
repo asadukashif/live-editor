@@ -1,0 +1,97 @@
+.ql-toolbar {
+  /* display: none; */
+}
+
+pre {
+  font-family: "Fira Code", "Consolas", "Courier", monospace;
+  font-size: 1.2rem !important;
+}
+
+.ql-editor {
+  padding: 0;
+  margin: 0;
+}
+
+.main-container {
+  height: 90vh;
+}
+
+.terminal {
+  height: 45vh;
+  background: rgba(0, 0, 0, 0.479);
+  font-family: "monaco";
+  padding: 0.5rem;
+  cursor: text;
+}
+
+#terminal--cursor {
+  display: block;
+  height: 17px;
+  width: 8px;
+  margin-left: 9px;
+  animation: blink 1200ms linear infinite;
+}
+
+@keyframes blink {
+  0% {
+    background: #ffffff;
+  }
+  49% {
+    background: #ffffff;
+  }
+  60% {
+    background: transparent;
+  }
+  99% {
+    background: transparent;
+  }
+  100% {
+    background: #ffffff;
+  }
+}
+
+#splitter {
+  cursor: row-resize;
+  background-color: rgba(7, 7, 7, 0.452);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='30'><path d='M2 0 v30 M5 0 v30 M8 0 v30' fill='none' stroke='white'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 10px;
+  width: 100%;
+  margin: 0.8rem 0;
+
+  /* Prevent the browser's built-in drag from interfering */
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.gutter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background: transparent;
+  cursor: n-resize;
+  height: 10px;
+  border-radius: 41px;
+  width: 95%;
+  margin: 0px auto;
+  box-shadow: rgb(220, 220, 220) 0 1px 7px 0px;
+}
+.split {
+  background-color: white;
+  border-radius: var(3px);
+  height: 2px;
+  width: 25px;
+  transition: background-color 0.1s ease 0s;
+}
+
+.gutter:hover {
+  cursor: n-resize;
+}
+
+#editor {
+  font-family: "Fira Code";
+  color: #fff;
+}

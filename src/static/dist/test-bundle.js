@@ -17173,10 +17173,10 @@ const Split = require("split.js");
 
 sharedb.types.register(richText.type);
 
-hljs.configure({
-  // optionally configure hljs
-  languages: ["python", "C++", "java"],
-});
+// hljs.configure({
+//   // optionally configure hljs
+//   languages: ["python", "C++", "java"],
+// });
 
 let quill = new Quill("#editor", {
   modules: {
@@ -17201,6 +17201,7 @@ doc.subscribe(function (err) {
     if (source !== "user") return;
     doc.submitOp(delta, { source: quill });
   });
+
   doc.on("op", function (op, source) {
     if (source === quill) return;
     quill.updateContents(op);
@@ -17210,6 +17211,16 @@ doc.subscribe(function (err) {
 document.addEventListener("DOMContentLoaded", () => {
   Split(["#editor", "#terminal"], {
     direction: "vertical",
+  });
+
+  const editor = document.getElementById("editor");
+
+  // setInterval(() => {
+  //   hljs.highlightElement(document.querySelector(".ql-editor"));
+  // }, 3000);
+  hljs.lineNumbersBlock();
+  document.getElementById("executeBtn").addEventListener("click", e => {
+    console.log("Code: ", editor.textContent);
   });
 
   document.querySelector(".gutter").innerHTML += '<div class="split"></div>';

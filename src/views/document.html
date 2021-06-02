@@ -1,14 +1,34 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<title>ShareDB Rich Text</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-<link href="/css/quill.snow.css" rel="stylesheet">
-<link href="https://raw.githubusercontent.com/highlightjs/highlight.js/main/src/styles/monokai-sublime.css"
-  rel="stylesheet">
+{% extends 'base_template.html' %}
 
-<div id="editor"></div>
+{% block stylesheets %}
+<link href="/css/quill.snow.css" rel="stylesheet">
+<link href="/css/themes/vsboi-theme.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/document.css">
+{% endblock stylesheets %}
+
+{% block bodyContent %}
+
+{% include 'navbar.html' %}
+
+<div class="main-container container-fluid d-flex flex-column">
+  <div class="py-3 d-flex align-items-center justify-content-center">
+    <button id="executeBtn" class="btn btn-md btn-outline-warning">Execute <i class="fas fa-play fa-1x"></i></button>
+  </div>
+  <div id="editor" class="coding-area" tabindex="0">
+  </div>
+  <div id="terminal" class="terminal text-white mt-auto mb-o"><span style="color: green;">👍🏽</span>
+    <span id="terminal--cursor"></span>
+  </div>
+
+</div>
+
+{% endblock bodyContent %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script
+  src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
 
 <script src="/dist/test-bundle.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"
-  integrity="sha512-s+tOYYcC3Jybgr9mVsdAxsRYlGNq4mlAurOrfNuGMQ/SCofNPu92tjE7YRZCsdEtWL1yGkqk15fU/ark206YTg=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock scripts %}
