@@ -4,6 +4,11 @@
   padding: 0;
 }
 
+html {
+  overflow-x: clip;
+  -webkit-overflow-scrolling: auto;
+}
+
 body {
   min-height: 100vh;
   display: flex;
@@ -146,4 +151,49 @@ footer {
   text-shadow: 2px 8px 40px white;
   font-weight: 600;
   font-size: 3rem;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar {
+  width: 15px;
+  z-index: -1;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.589);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a8bbbf00;
+}
+
+/* Awein for line numbers */
+
+.hljs-ln-numbers {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  text-align: center;
+  color: #ccc;
+  border-right: 1px solid #ccc;
+  vertical-align: top;
+  padding-right: 5px;
+
+  /* your custom style here */
+}
+
+/* for block of code */
+.hljs-ln-code {
+  padding-left: 10px;
 }
