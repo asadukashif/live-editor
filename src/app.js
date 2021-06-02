@@ -50,5 +50,5 @@ wss.on("connection", function (ws) {
   backend.listen(stream);
 });
 
-server.listen(8080);
+server.listen(8080, "0.0.0.0");
 console.log("Listening on http://localhost:8080");
