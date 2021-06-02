@@ -2,8 +2,6 @@ const express = require("express");
 const nunjucks = require("nunjucks");
 const bodyParser = require("body-parser");
 const path = require("path");
-const http = require("http");
-const { Server } = require("socket.io");
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -43,9 +41,11 @@ nunjucks.configure(["src/views/", "src/static/"], {
   express: app,
 });
 
-// server.listen(3000, () => {
-//   console.log("Server running at http://localhost:3000");
-// });
+app.use("/", require("../routes/HomeRoute"));
+app.use("/document", require("../routes/DocumentRoute"));
+app.use("/auth", require("../routes/AuthRoute"));
+
+
 
 module.exports.app = app;
 // module.exports.io = io;
