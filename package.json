@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon --ext html,js,css src/app.js ",
     "build": "browserify src/static/js/document.js -o src/static/dist/test-bundle.js",
-    "deploy": "node src/app.js"
+    "deploy": "node src/app.js",
+    "watch": "nodemon --watch src/static/js/document.js --exec npm run build"
   },
   "author": "ShaderOX, green-mint",
   "license": "MIT",
@@ -23,6 +24,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "highlightjs": "^9.16.2",
     "mongoose": "^5.12.11",
     "nunjucks": "^3.2.3",
     "ot-text": "^1.0.2",
@@ -34,6 +36,7 @@
     "sharedb": "^1.8.1",
     "sharedb-mongo": "*",
     "socket.io": "^4.1.2",
+    "split.js": "^1.6.4",
     "uuid": "^8.3.2",
     "websocket-json-stream": "^0.0.3"
   }
