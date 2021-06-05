@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { fetchDoc, createDoc } = require("../middleware/document");
+const { ensureDoc, createDoc } = require("../middleware/document");
 const { v4 } = require("uuid");
 
 router.get("/", (req, res) => {
@@ -11,11 +11,11 @@ router.get("/new", createDoc ,(req, res) => {
 });
 
 router.get(
-  "/:id/", fetchDoc ,(req, res) => {
+  "/:id/", ensureDoc, (req, res) => {
     if (req.params.docFound) {
       return res.render("document.html");
     } else {
-      res.send("Could not find the document");;
+      return res.send("Could not find the document");
     }
   }
 );
