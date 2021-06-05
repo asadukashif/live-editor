@@ -5,36 +5,25 @@ require("codemirror/mode/javascript/javascript");
 // require('codemirror/mode/')
 let ShareDBCodeMirror = require("./sharedb-codemirror");
 let { langMap } = require("../../config/langMap");
-
-sharedb.types.register(richText.type);
-
 let debug = true;
-
 let ws, connection, codeMirror, shareDBCodeMirror;
-
 let docid = window.location.href.split("/")[4];
 let language = langMap[docid.slice(0, 4)];
 console.log(language);
-
 window.onload = event => {
   ws = new WebSocket("ws://" + window.location.host);
   connection = new ShareDB.Connection(ws);
-
   codeMirror = new CodeMirror(document.getElementById("textarea"), {
     lineNumbers: true,
     theme: "material-darker",
     mode: "text/x-csrc",
   });
-
   shareDBCodeMirror = new ShareDBCodeMirror(codeMirror, {
     verbose: debug,
     key: "content",
   });
-
   console.log(docid);
-
   doc = connection.get("docs", docid);
-
   shareDBCodeMirror.attachDoc(doc, error => {
     if (error) {
       console.error(error);
@@ -43,15 +32,12 @@ window.onload = event => {
     codeMirror.setOption("mode", "javascript");
   });
 };
-
 let runButton = document.getElementById("run-code");
-
 runButton.addEventListener("click", () => {
   console.log(codeMirror);
   console.log();
   const data = { code: codeMirror.getValue() };
   console.log(data);
-
   fetch("/run", {
     method: "POST", // or 'PUT'
     headers: {
