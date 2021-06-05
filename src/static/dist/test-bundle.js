@@ -22138,6 +22138,7 @@ var WebSocket = require('reconnecting-websocket');
 var ShareDB = require('sharedb/lib/client');
 var CodeMirror = require('codemirror');
 require('codemirror/mode/javascript/javascript');
+// require('codemirror/mode/')
 var ShareDBCodeMirror = require('./sharedb-codemirror');
 
 
@@ -22151,7 +22152,11 @@ window.onload = (event) => {
   ws = new WebSocket('ws://' + window.location.host);
   
 	connection = new ShareDB.Connection(ws);
-	codeMirror = new CodeMirror(document.getElementById('textarea'));
+	codeMirror = new CodeMirror(document.getElementById('textarea'), {
+    lineNumbers: true,
+    theme: "material-darker",
+    mode: "text/x-csrc"
+  });
 	shareDBCodeMirror = new ShareDBCodeMirror(codeMirror, {verbose: debug, key: 'content'});
   
   console.log(docid);
