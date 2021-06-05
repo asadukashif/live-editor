@@ -1,75 +1,55 @@
-// const hljs = require("highlightjs");
-var ReconnectingWebSocket = require("reconnecting-websocket");
-var sharedb = require("sharedb/lib/client");
-var richText = require("rich-text");
-// var Quill = require("quill");
-const Split = require("split.js");
-let ReconnectingWebSocket = require("reconnecting-websocket");
-let sharedb = require("sharedb/lib/client");
-let richText = require("rich-text");
-let Quill = require("quill");
-let fetch = require("node-fetch");
-sharedb.types.register(richText.type);
+let WebSocket = require("reconnecting-websocket");
+let ShareDB = require("sharedb/lib/client");
+let CodeMirror = require("codemirror");
+require("codemirror/mode/javascript/javascript");
+// require('codemirror/mode/')
+let ShareDBCodeMirror = require("./sharedb-codemirror");
+let { langMap } = require("../../config/langMap");
 
 sharedb.types.register(richText.type);
 
-hljs.configure({
-  // optionally configure hljs
-  languages: ["python", "C++", "java"],
-});
+let debug = true;
 
-let quill = new Quill("#editor", {
-  modules: {
-    syntax: true, // Include syntax module
-    toolbar: [["code-block"]], // Include button in toolbar
-  },
-  placeholder: "Hi!",
-  theme: "snow",
-});
-
-let socket = new ReconnectingWebSocket("ws://" + window.location.host);
-let connection = new sharedb.Connection(socket);
+let ws, connection, codeMirror, shareDBCodeMirror;
 
 let docid = window.location.href.split("/")[4];
-console.log(docid);
+let language = langMap[docid.slice(0, 4)];
+console.log(language);
 
-var doc = connection.get("examples", docid);
-doc.subscribe(function (err) {
-  if (err) throw err;
-  quill.setContents(doc.data);
-  quill.on("text-change", function (delta, oldDelta, source) {
-    if (source !== "user") return;
-    doc.submitOp(delta, { source: quill });
+window.onload = event => {
+  ws = new WebSocket("ws://" + window.location.host);
+  connection = new ShareDB.Connection(ws);
+
+  codeMirror = new CodeMirror(document.getElementById("textarea"), {
+    lineNumbers: true,
+    theme: "material-darker",
+    mode: "text/x-csrc",
   });
 
-  doc.on("op", function (op, source) {
-    if (source === quill) return;
-    quill.updateContents(op);
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  Split(["#editor", "#terminal"], {
-    direction: "vertical",
+  shareDBCodeMirror = new ShareDBCodeMirror(codeMirror, {
+    verbose: debug,
+    key: "content",
   });
 
-  const editor = document.getElementById("editor");
+  console.log(docid);
 
-  // setInterval(() => {
-  //   hljs.highlightElement(document.querySelector(".ql-editor"));
-  // }, 3000);
-  hljs.lineNumbersBlock();
-  document.getElementById("executeBtn").addEventListener("click", e => {
-    console.log("Code: ", editor.textContent);
+  doc = connection.get("docs", docid);
+
+  shareDBCodeMirror.attachDoc(doc, error => {
+    if (error) {
+      console.error(error);
+      return;
+    }
+    codeMirror.setOption("mode", "javascript");
   });
-
-  document.querySelector(".gutter").innerHTML += '<div class="split"></div>';
-});
-const data = { username: "example" };
+};
 
 let runButton = document.getElementById("run-code");
+
 runButton.addEventListener("click", () => {
-  const data = { code: quill.getContents().ops[0].insert };
+  console.log(codeMirror);
+  console.log();
+  const data = { code: codeMirror.getValue() };
   console.log(data);
 
   fetch("/run", {
