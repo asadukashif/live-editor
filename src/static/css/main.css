@@ -14,11 +14,12 @@ body {
   display: flex;
   flex-direction: column;
   font-family: "Montserrat", sans-serif;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to bottom,
     rgb(1, 29, 32),
     rgb(0, 0, 0)
-  ) !important;
+  ) !important; */
+  background: rgb(0, 0, 0) !important;
 }
 nav {
   width: 100%;
@@ -76,7 +77,7 @@ nav,
   /* border: 1px solid rgba(255, 255, 255, 0.514); */
   /* background-color: rgba(0, 17, 17, 0.7);
   */
-  background: #00000004;
+  background: black;
   height: auto;
 }
 
