@@ -9,22 +9,43 @@
 
 {% block bodyContent %}
 
+
+{% set isDocument = true %}
 {% include 'navbar.html' %}
 
-<div id="textarea"></div>
-<button id="run-code">RUN</button>
-<script src="/dist/test-bundle.js"></script>
+<div class="main-container mx-md-4 mx-lg-4 m-sm-0">
+  <!-- <div class="py-3 d-flex align-items-center justify-content-center">
+    <button id="run-code" class="btn btn-md btn-outline-warning">Execute <i class="fas fa-play fa-1x"></i></button>
+  </div> -->
+  <div id="textarea" class="mt-3"></div>
+  <div id="terminal" class="terminal text-white mt-auto d-flex">
+    <span class="me-3" style="color: #00ff11; font-size: 1rem;">$</span><textarea id="terminal-output"
+      disabled></textarea>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <i class="fas fa-sliders-h"></i>
+    </button>
 
-<div class="main-container container-fluid d-flex flex-column">
-  <div class="py-3 d-flex align-items-center justify-content-center">
-    <button id="executeBtn" class="btn btn-md btn-outline-warning">Execute <i class="fas fa-play fa-1x"></i></button>
-  </div>
-  <div id="editor" class="coding-area" tabindex="0">
-  </div>
-  <div id="terminal" class="terminal text-white mt-auto mb-o"><span style="color: green;">👍🏽</span>
-    <span id="terminal--cursor"></span>
-  </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+  </div>
 </div>
 
 {% endblock bodyContent %}

@@ -1,27 +1,27 @@
-.ql-toolbar {
-  /* display: none; */
-}
+@import url("https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap");
 
-pre {
-  font-family: "Fira Code", "Consolas", "Courier", monospace;
-  font-size: 1.2rem !important;
+body {
+  background-image: none !important;
+  background-color: black !important;
+  overflow-y: hidden;
 }
-
-.ql-editor {
-  padding: 0;
-  margin: 0;
-}
-
 .main-container {
   height: 90vh;
 }
 
 .terminal {
   height: 45vh;
-  background: rgba(0, 0, 0, 0.479);
+  background-color: #101010;
   font-family: "monaco";
   padding: 0.5rem;
   cursor: text;
+}
+
+#terminal-output {
+  background: #f0f8ff00;
+  color: white;
+  border: none;
+  width: 100%;
 }
 
 #terminal--cursor {
@@ -52,11 +52,11 @@ pre {
 
 #splitter {
   cursor: row-resize;
-  background-color: rgba(7, 7, 7, 0.452);
+  background-color: #b8b8b8;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='30'><path d='M2 0 v30 M5 0 v30 M8 0 v30' fill='none' stroke='white'/></svg>");
   background-repeat: no-repeat;
   background-position: center;
-  height: 10px;
+  height: 4px;
   width: 100%;
   margin: 0.8rem 0;
 
@@ -68,16 +68,17 @@ pre {
 
 .gutter {
   display: flex;
+  background-color: rgb(220, 220, 220) !important;
+
   align-items: center;
   justify-content: center;
   border-radius: 5px;
   background: transparent;
   cursor: n-resize;
-  height: 10px;
-  border-radius: 41px;
-  width: 95%;
+  height: 4px !important;
+  border-radius: 15% !important;
+  width: 100%;
   margin: 0px auto;
-  box-shadow: rgb(220, 220, 220) 0 1px 7px 0px;
 }
 .split {
   background-color: white;
@@ -91,7 +92,20 @@ pre {
   cursor: n-resize;
 }
 
-#editor {
+#textarea {
+  background-color: #1a1919;
+  font: "Fira Code";
+}
+
+#textarea .CodeMirror {
   font-family: "Fira Code";
-  color: #fff;
+  width: 100%;
+  height: 100%;
+}
+#textarea .CodeMirror-linenumber {
+  color: aliceblue;
+}
+#textarea .CodeMirror-gutter {
+  background-color: #101010;
+  margin-right: 0.3;
 }
