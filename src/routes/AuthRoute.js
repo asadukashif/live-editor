@@ -19,6 +19,19 @@ router.get(
   }
 );
 
+router.get(
+  "/github/", ensureGuest,
+  passport.authenticate("github", )
+)
+
+router.get(
+  "/github/callback", ensureGuest,
+  passport.authenticate("github", { failureRedirect: "/" }),
+  (req, res) => {
+    res.redirect("/");
+  }
+);
+
 // @desc Logout the user
 // @route GET /auth/logout
 router.get("/logout", ensureAuth, (req, res) => {

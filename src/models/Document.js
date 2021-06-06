@@ -9,8 +9,13 @@ const DocumentSchema = new Schema({
     type: String,
     ref: "User",
   },
-  data: {
-    type: Object
+  name: {
+    type: String,
+    required: true,
+  },
+  language: {
+    type: String,
+    required: true,
   }
 });
 

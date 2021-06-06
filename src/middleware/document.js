@@ -1,6 +1,7 @@
 const { connection } = require("../config/sharedb");
 const { v4 } = require("uuid");
 const { langMap } = require("../config/langMap")
+const Document = require("../models/Document")
 
 
 module.exports = {
@@ -39,10 +40,17 @@ module.exports = {
     doc.fetch(function (err) {
       if (err) throw err;
       if (doc.type === null) {
-        doc.create({ content: "Type something ..." , options: {
-          name: "My project",
-          language: "Python"
-        }});
+        doc.create({ content: "Type something ..." });
+        if (req.user) {
+          console.log("User was present");
+          console.log(req.user);
+          Document.create({
+            _id: docid,
+            owner: req.user.id,
+            name: "Untitled",
+            language: lang,
+          })
+        }
         req.params.docid = docid;
       } else {
         console.log("Document was already created");
