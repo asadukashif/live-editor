@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/user/:id", ensureAuth, (req, res) => {
-  if (req.user != req.params.id) {
+  if (req.user._id != req.params.id) {
     return res.send("You are not allowed to view this page")
   }
   
