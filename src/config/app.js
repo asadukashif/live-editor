@@ -36,6 +36,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+  // Passing the user
+  res.locals.user = req.user;
+
+  next();
+});
+
 // Configure Nunjucks settings
 nunjucks.configure(["src/views/", "src/static/"], {
   autoescape: false,
@@ -46,7 +53,6 @@ app.use("/", require("../routes/HomeRoute"));
 app.use("/document", require("../routes/DocumentRoute"));
 app.use("/auth", require("../routes/AuthRoute"));
 app.use("/run", require("../routes/RunRoute"));
-
 
 module.exports.app = app;
 // module.exports.io = io;
