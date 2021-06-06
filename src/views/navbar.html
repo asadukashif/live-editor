@@ -1,22 +1,37 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-
 <nav class="navbar navbar-expand-lg navbar sticky-top navbar-dark mx-auto">
-  <div class="container-fluid mx-5 ">
-    <a class="navbar-brand" href="/"><img src="/img/brand.png" height="64" width="64" alt="logo"></a>
+  <div class="container-fluid mx-5">
+    <a class="navbar-brand ms-0" href="/"><img src="/img/brand.png" height="64" width="64" alt="logo"></a>
     <!-- <a class="navbar-brand flex-nowrap heading fs-3" style="letter-spacing: 0.3rem;" href="/">Bocks</a> -->
     {% if user %}
-    <span class="text-white d-lg-block d-none  d-md-block text-lead fs-6"
-      style="letter-spacing: 0.15rem; margin-left: 0; margin-right: auto; font-family: 'fira code';">
+
+    {% if isDocument %}
+    <span class="text-white ms-1 d-lg-block d-none d-md-block text-lead fs-6"
+      style="letter-spacing: 0.15rem; font-family: 'fira code';">
+      @{{ user.name }}
+    </span>
+    {% else %}
+    <span class="text-white ms-1 d-lg-block d-none d-md-block text-lead fs-6"
+      style="letter-spacing: 0.15rem; font-family: 'fira code'; margin: 0 auto;">
       @{{ user.name }}
     </span>
     {% endif %}
+    {% endif %}
+
+    {% if isDocument %}
+    <button id="run-code" class="btn btn-md btn-outline-warning ms-auto me-auto"><span
+        class="d-lg-inline d-none d-md-inline">Execute</span>
+      <i class="fas fa-play fa-1x"></i></button>
+    {% endif %}
+
     <div class="m-sm-0 d-flex justify-content-end align-items-end flex-column">
       <button class="btn-toggle btn-outline-light btn d-lg-none text-center" style="border: none;" type="button"
         data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
         aria-label="Toggle navigation">
         <span><i class="fas fa-bars"></i></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav justify-content-around d-flex align-items-end justify-content-end"
           style="min-width: 15vw;">
