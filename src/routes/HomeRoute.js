@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
   res.render("home.html");
 });
 
-router.get("/user/:id", ensureAuth, (req, res) => {
+router.get("/users/:id", ensureAuth, (req, res) => {
   if (req.user._id != req.params.id) {
     return res.send("You are not allowed to view this page")
   }
@@ -15,11 +15,14 @@ router.get("/user/:id", ensureAuth, (req, res) => {
   Document.find({
     owner: req.params.id,
   }, (err, docs) => {
-    console.log(err);
-    console.log(docs);
+    if (err) {
+      return res.send("We are facing some technical issues! Apologies for any inconvience");
+    }
+    return res.render("document_new.html", {
+      documents: docs,
+    })
   })
 
-  res.render("document_new.html")
 })
 
 module.exports = router;
