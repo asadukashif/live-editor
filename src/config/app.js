@@ -49,10 +49,10 @@ nunjucks.configure(["src/views/", "src/static/"], {
   express: app,
 });
 
+// define the application routes
 app.use("/", require("../routes/HomeRoute"));
 app.use("/document", require("../routes/DocumentRoute"));
 app.use("/auth", require("../routes/AuthRoute"));
-app.use("/run", require("../routes/RunRoute"));
 
 module.exports.app = app;
 // module.exports.io = io;
