@@ -19,30 +19,14 @@
     </button>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-white" style="background-color: rgba(1, 33, 37, 0.39);">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add a new document</h5>
-            <button type="button" class="btn-outline-light bg-transparent " id="modalCloseBtn" style="border: none;"
-              data-bs-dismiss="modal" aria-label="Close"><i class="far fa-times-circle fa-2x"></i></button>
-          </div>
-          <div class="modal-body">
-            <form class="d-flex justify-content-between align-items-center">
-              <div class="input-group mb-3 ">
-                <div class="input-group-prepend">
-                  <label class="input-group-text bg-dark text-white" for="inputGroupSelect01">Language</label>
-                </div>
-                <select class="custom-select" id="inputGroupSelect01">
-                  <option value="c">C</option>
-                  <option value="c++">C++</option>
-                  <option value="node">Node</option>
-                </select>
-              </div>
-              <input type="text" name="" class="form-control bg-dark text-white" placeholder="Name your document" id="">
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Send message</button>
+        <div class="modal-content text-white" style="background-color: rgba(1, 33, 37, 0.8);">
+          <div class="modal-body text-center rounded-2">
+            <h4>Language</h4>
+            <div class="justify-content-center my-4">
+              <button class="lang-btns"><a href="/document/new/cpp"><img class="pngz" src="/img/c.png" alt="C++" width="75px" height="75px"></a></button>
+              <button class="lang-btns"><a href="/document/new/python"><img class="pngz" src="/img/python.png" alt="C++" width="75px" height="75px"></a></button>
+              <button class="lang-btns"><a href="/document/new/node-js"><img class="pngz" src="/img/nodejs.png" alt="C++" width="75px" height="75px"></a></button>
+            </div>
           </div>
         </div>
       </div>
@@ -71,6 +55,6 @@
   </div>
 </div>
 
-{% include 'footer.html' %}
+<!-- {% include 'footer.html' %} -->
 
 {% endblock %}

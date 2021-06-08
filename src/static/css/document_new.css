@@ -37,3 +37,20 @@
 }
 #modalCloseBtn:hover {
 }
+
+.lang-btns {
+  cursor: pointer;
+  padding: 10px 15px;
+  background: rgb(30, 30, 30);
+  border: 1px solid rgb(255, 255, 255);
+  box-shadow: 1px 1px 1px 1px  rgb(255, 255, 255);
+  border-radius: 10px;
+  color: white;
+  margin: 10px 10px;
+}
+.pngz {
+  background: inherit;
+  border-radius: inherit;
+  /* box-shadow: 3px  3px 10px white; */
+
+}
