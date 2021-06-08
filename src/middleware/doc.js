@@ -3,6 +3,11 @@ const { v4 } = require("uuid");
 const { langMap } = require("../config/langMap")
 const Document = require("../models/Document")
 
+const langStart = {
+  python: 'print("Hello World")',
+  "node-js": 'console.log("Hello World");',
+  "cpp": '#include <iostream>\n\nint main(int argc, char** argv) {\n\tstd::cout << "Hello World" << std::endl;\n}'
+}
 
 module.exports = {
   ensureDoc: (req, res, next) => {
@@ -40,7 +45,7 @@ module.exports = {
     doc.fetch(function (err) {
       if (err) throw err;
       if (doc.type === null) {
-        doc.create({ content: "Type something ..." });
+        doc.create({ content: langStart[lang] });
         if (req.user) {
           console.log("User was present");
           console.log(req.user);

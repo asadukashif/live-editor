@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { ensureDoc, createDoc } = require("../middleware/document");
+const { ensureDoc, createDoc } = require("../middleware/doc");
 const { v4 } = require("uuid");
 
 router.get("/new/", (req, res) => {
