@@ -9,7 +9,7 @@ module.exports = function (passport) {
     new googleStrategy(
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: "RHgj-wNi1MnDP_n4giwGnJq8",
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: "/auth/google/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
@@ -37,8 +37,8 @@ module.exports = function (passport) {
   passport.use(
     new GitHubStrategy(
       {
-        clientID: "84084b8dbbc2ee144c89",
-        clientSecret: "cd9e8b805429cd59ffa139439272ff39536e620a",
+        clientID: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
         callbackURL: "/auth/github/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
