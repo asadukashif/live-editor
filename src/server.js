@@ -4,6 +4,8 @@ const WebSocketJSONStream = require("@teamwork/websocket-json-stream");
 const { app } = require("./config/app");
 const connectDB = require("./config/mongodb");
 const { backend } = require("./config/sharedb");
+require("dotenv").config();
+
 
 // Connect to the database
 connectDB();
@@ -17,5 +19,5 @@ wss.on("connection", function (ws) {
   backend.listen(stream);
 });
 
-server.listen(3000);
-console.log("Listening on http://localhost:3000");
+server.listen(process.env.PORT);
+console.log(`Listening on http://localhost:${process.env.PORT}`);
