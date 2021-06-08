@@ -9,6 +9,59 @@ const langStart = {
   "cpp": '#include <iostream>\n\nint main(int argc, char** argv) {\n\tstd::cout << "Hello World" << std::endl;\n}'
 }
 
+const fileNames = [
+  "managementradio",
+  "luckygather",
+  "sheetcoach",
+  "passionexciting",
+  "choicesect",
+  "seriouslycoalition",
+  "chocolatesnowboard",
+  "violationseat",
+  "bladepanicky",
+  "oughtpure",
+  "cabinscript",
+  "chipsexual",
+  "moremention",
+  "chordcostarican",
+  "fromscratch",
+  "hourchuckle",
+  "wirewedding",
+  "proteinweight",
+  "chancenether",
+  "whomdunbird",
+  "effectivemangoes",
+  "executivetable",
+  "wellimmigrant",
+  "shortlykefir",
+  "roadafternoon",
+  "chinesefrail",
+  "fasthuddle",
+  "pantyexpel",
+  "paintauction",
+  "majoritymutant",
+  "regardlesscap",
+  "babytamarin",
+  "suicidetired",
+  "springjowl",
+  "quotawelfare",
+  "treatmentimmodest",
+  "anticipatepingpong",
+  "loverpitcher",
+  "tunnelrosary",
+  "cultblueeyed",
+  "campusarray",
+  "bitmat",
+  "addressdivvy",
+  "preferencemission",
+  "promotebullocks",
+  "somewhereerror",
+  "naturallyprime",
+  "diverselazuli",
+  "problemshrewdness",
+  "englishcrave",
+]
+
 module.exports = {
   ensureDoc: (req, res, next) => {
     const docid = req.params.id;
@@ -52,7 +105,7 @@ module.exports = {
           Document.create({
             _id: docid,
             owner: req.user.id,
-            name: "Untitled",
+            name: fileNames[Math.floor(Math.random() * fileNames.length)],
             language: lang,
           })
         }
