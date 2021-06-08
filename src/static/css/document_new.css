@@ -35,8 +35,7 @@
   border-radius: 50%;
   color: white;
 }
-#modalCloseBtn:hover {
-}
+
 
 .lang-btns {
   cursor: pointer;
@@ -52,5 +51,4 @@
   background: inherit;
   border-radius: inherit;
   /* box-shadow: 3px  3px 10px white; */
-
 }
