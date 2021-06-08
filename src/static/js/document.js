@@ -8,7 +8,6 @@ const docid = window.location.href.split("/")[4];
 const language = langMap[docid.slice(0, 4)];
 const Split = require("split.js");
 
-
 const DEBUG = false;
 const MODES = {
   python: "text/x-python",
@@ -100,15 +99,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     })
       .then(response => response.json())
       .then(data => {
+        const { run, compile } = data;
         let output = "";
-        if (!data.run.stderr) {
-          output = data.run.stdout;
-        } else {
+        let statusCode = 0;
+
+        // Checking for compilation errors
+        if (compile.stderr) {
           terminalOutput.classList.add("text-danger");
-          output = data.run.stderr;
+          output = compile.stderr;
+          statusCode = compile.code;
+        } else {
+          // Checking for runtime errors
+          statusCode = run.code;
+
+          if (!run.stderr) {
+            output = run.stdout;
+          } else {
+            terminalOutput.classList.add("text-danger");
+            output = run.stderr;
+          }
         }
-        terminalOutput.innerHTML =
-          output + `\n\nProgram finished with exit code ${data.run.code}`;
+        terminalOutput.innerHTML = `${output}\n\nProgram finished with exit code ${statusCode}`;
       });
   });
 });
