@@ -34,6 +34,8 @@ The application would need
 
 varibles in order to access the database, support Google Authentication and Github Authentication.
 
+Now, before 
+
 Next, run 
 ```
 npm start
