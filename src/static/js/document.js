@@ -7,6 +7,13 @@ const { langMap } = require("../../config/langMap");
 const docid = window.location.href.split("/")[4];
 const language = langMap[docid.slice(0, 4)];
 const Split = require("split.js");
+require("codemirror/addon/edit/closebrackets");
+require("codemirror/addon/edit/matchbrackets");
+require("codemirror/addon/edit/closetag");
+
+require("codemirror/keymap/sublime");
+require("codemirror/addon/comment/comment");
+require("codemirror/addon/comment/continuecomment");
 
 const DEBUG = false;
 const MODES = {
@@ -37,6 +44,7 @@ window.onload = event => {
       break;
     case "node-js":
       require("codemirror/mode/javascript/javascript");
+
       break;
     case "python":
       require("codemirror/mode/python/python");
@@ -46,8 +54,13 @@ window.onload = event => {
   codeMirror = new CodeMirror(document.getElementById("textarea"), {
     lineNumbers: true,
     tabSize: 2,
+    autoCloseBrackets: true,
+    autoCloseTags: true,
+    matchBrackets: true,
     theme: "material-darker",
     mode: MODES[language],
+    lineWrapping: true,
+    keyMap: "sublime",
   });
   shareDBCodeMirror = new ShareDBCodeMirror(codeMirror, {
     verbose: DEBUG,
@@ -104,7 +117,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         let statusCode = 0;
 
         // Checking for compilation errors
-        if (compile.stderr) {
+        if (compile && compile.stderr) {
           terminalOutput.classList.add("text-danger");
           output = compile.stderr;
           statusCode = compile.code;
