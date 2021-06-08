@@ -7,14 +7,14 @@
     {% if user %}
 
     {% if isDocument %}
-    <span class="text-white ms-1 d-lg-block d-none d-md-block text-lead fs-6"
+    <span class="ms-1 d-lg-block d-none d-md-block text-lead fs-6"
       style="letter-spacing: 0.15rem; font-family: 'fira code';">
-      @{{ user.name }}
+      <a class="text-white" style="text-decoration: none;" href="/users/{{ user._id }}">@{{ user.name }}</a>
     </span>
     {% else %}
     <span class="text-white ms-1 d-lg-block d-none d-md-block text-lead fs-6"
       style="letter-spacing: 0.15rem; font-family: 'fira code'; margin: 0 auto;">
-      @{{ user.name }}
+      <a class="text-white" style="text-decoration: none;" href="/users/{{ user._id }}">@{{ user.name }}</a>
     </span>
     {% endif %}
     {% endif %}

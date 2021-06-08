@@ -4,10 +4,10 @@ const CodeMirror = require("codemirror");
 require("codemirror/mode/javascript/javascript");
 const ShareDBCodeMirror = require("./sharedb-codemirror");
 const { langMap } = require("../../config/langMap");
-let ws, connection, codeMirror, shareDBCodeMirror;
 const docid = window.location.href.split("/")[4];
 const language = langMap[docid.slice(0, 4)];
 const Split = require("split.js");
+
 
 const DEBUG = false;
 const MODES = {
@@ -26,6 +26,7 @@ const VERSIONS = {
   cpp: "10.2.0",
 };
 
+let ws, connection, codeMirror, shareDBCodeMirror;
 console.log(language);
 window.onload = event => {
   ws = new WebSocket("ws://" + window.location.host);
