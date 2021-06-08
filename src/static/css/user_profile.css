@@ -5,7 +5,7 @@
   background-image: linear-gradient(
     to bottom,
     rgb(0, 0, 0),
-    rgb(1, 50, 56),
+    rgb(1, 26, 29),
     rgb(0, 0, 0)
   ) !important;
   z-index: -99;
@@ -14,7 +14,7 @@
 .card {
   background-color: rgba(6, 13, 19, 0.315) !important;
   box-shadow: rgb(220, 220, 220) -2px 2px 4px 0px;
-  margin: 0 2rem 0 1rem !important;
+  /* margin: 0 2rem 0 1rem !important; */
   width: 25.5rem !important;
   height: auto;
 }
@@ -36,16 +36,16 @@
   color: white;
 }
 
-
 .lang-btns {
   cursor: pointer;
   padding: 10px 15px;
-  background: rgb(30, 30, 30);
   border: 1px solid rgb(255, 255, 255);
-  box-shadow: 1px 1px 1px 1px  rgb(255, 255, 255);
-  border-radius: 10px;
   color: white;
   margin: 10px 10px;
+
+  border-radius: 3px;
+  background: rgba(17, 17, 17, 0);
+  box-shadow: rgb(220, 220, 220) -1px 1px 3px 0px;
 }
 .pngz {
   background: inherit;

@@ -1,0 +1,51 @@
+{% extends "base_template.html" %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/css/user_profile.css">
+{% endblock stylesheets %}
+
+{% set extensions = { 'python': '.py', 'cpp': '.cpp', 'node-js': '.js' } %}
+
+{% block bodyContent %}
+
+<div class="bg-gradient-custom"></div>
+{% include 'navbar.html' %}
+
+<div class="container">
+  <div class="create-new mt-5">
+    <span class="heading text-white">New</span>
+    <br />
+    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#languageSelectionModal">
+      <i class="fas fa-plus fa-1x"></i> Add a new document
+    </button>
+    {% include 'language-selection-modal.html' %}
+  </div>
+  <div class="recents mt-5">
+    <span class="heading text-white">My Files</span>
+    <div class="cards-container row mt-3 ms-0 m-sm-0">
+
+      {% for document in documents %}
+      <div class="card text-light mt-3 col-lg-4 col-sm-12 mx-2">
+        <div class="card-body text-center d-flex flex-column align-items-center">
+          <div class="d-flex flex-column align-items-center">
+            <h5 class="card-title display-5 fs-3 font-monospace" style="letter-spacing: 0.1rem;">
+              {{ document.name }}{{ extensions[ document.language ] }}
+            </h5>
+            <img src="/img/{{ document.language }}.png" height="32" width="32" alt="">
+          </div>
+
+          <div class="align-self-end">
+            <a href="/document/{{ document._id }}" class="card-link btn btn-outline-light">Edit <i
+                class="fas fa-code"></i></a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+<!-- {% include 'footer.html' %} -->
+
+{% endblock %}
