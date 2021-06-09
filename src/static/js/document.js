@@ -82,6 +82,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     direction: "vertical",
   });
 
+  let commandLineArgs;
+  let stdin;
+  document.getElementById("save-btn").addEventListener("click", e => {
+    const settingsModal = document.getElementById("settingsModal");
+    const commandLineArgsField = document.getElementById("cl-args-field");
+    const stdinField = document.getElementById("stdin-field");
+
+    commandLineArgs = commandLineArgsField.value.split(" ");
+    stdin = stdinField.value;
+    console.log(commandLineArgs, stdin);
+    return;
+  });
+
   const terminalOutput = document.getElementById("terminal-output");
 
   const runButton = document.getElementById("run-code");
@@ -102,8 +115,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             content: code,
           },
         ],
-        stdin: "",
-        args: [],
+        stdin: stdin,
+        args: commandLineArgs,
         compile_timeout: 10000,
         run_timeout: 3000,
         compile_memory_limit: -1,

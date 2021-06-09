@@ -21,11 +21,35 @@
   <div id="terminal" class="terminal text-white mt-auto d-flex">
     <span class="me-3" style="color: #00ff11; font-size: 1rem;">$</span><textarea id="terminal-output"
       disabled></textarea>
+    <button data-bs-toggle="modal" data-bs-target="#settingsModal" class="btn btn-outline-primary"><i
+        class="fas fa-sliders-h"></i></button>
   </div>
 </div>
 
-{% endblock bodyContent %}
-<div class="run-code" id="run-code"><button>Run</button></div>
+<div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-white"
+      style="background-color: rgba(1, 7, 8, 0.8); box-shadow: rgb(220, 220, 220) -2px 2px 4px 0px;">
+      <div class="modal-body text-center rounded-2">
+        <h4 class="heading font-monospace" style="font-size: 1.8rem;">Settings</h4>
+        <div class="my-4 d-flex flex-column align-items-center justify-content-between">
+          <input type="text" id="cl-args-field" class="form-control font-monospace my-2" autocomplete="off"
+            placeholder="Command Line Arguments" />
+          <input type="text" id="stdin-field" class="form-control font-monospace my-2" autocomplete="off"
+            placeholder="Standard Input" />
+        </div>
+        <div class="d-flex justify-content-end">
+          <button id="save-btn" class="btn btn-outline-success" data-bs-dismiss="modal">Save <i
+              class="fas fa-save"></i></button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock bodyContent %} <div class="run-code" id="run-code"><button>Run</button>
+</div>
 
 {% block scripts %}
 <script src="/dist/test-bundle.js"></script>
