@@ -21,7 +21,7 @@
   <div id="terminal" class="terminal text-white mt-auto d-flex">
     <span class="me-3" style="color: #00ff11; font-size: 1rem;">$</span><textarea id="terminal-output"
       disabled></textarea>
-    <button data-bs-toggle="modal" data-bs-target="#settingsModal" class="btn btn-outline-primary"><i
+    <button data-bs-toggle="modal" data-bs-target="#settingsModal" class="btn btn-outline-primary align-self-start"><i
         class="fas fa-sliders-h"></i></button>
   </div>
 </div>
@@ -33,11 +33,19 @@
       <div class="modal-body text-center rounded-2">
         <h4 class="heading font-monospace" style="font-size: 1.8rem;">Settings</h4>
         <div class="my-4 d-flex flex-column align-items-center justify-content-between">
-          <input type="text" id="cl-args-field" class="form-control font-monospace my-2" autocomplete="off"
-            placeholder="Command Line Arguments" />
-          <input type="text" id="stdin-field" class="form-control font-monospace my-2" autocomplete="off"
-            placeholder="Standard Input" />
+
+          <div class="form-floating font-monospace text-dark my-2 w-100">
+            <input type="text" id="cl-args-field" class="form-control" autocomplete="off"
+              placeholder="Command Line Arguments" />
+            <label for="cl-args-field">Command Line Arguments</label>
+          </div>
+
+          <div class="form-floating font-monospace text-dark my-2 w-100">
+            <input type="text" id="stdin-field" class="form-control" autocomplete="off" placeholder="Standard Input" />
+            <label for="stdin-field">Standard Input</label>
+          </div>
         </div>
+
         <div class="d-flex justify-content-end">
           <button id="save-btn" class="btn btn-outline-success" data-bs-dismiss="modal">Save <i
               class="fas fa-save"></i></button>
