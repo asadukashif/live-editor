@@ -80,6 +80,7 @@ window.onload = event => {
 document.addEventListener("DOMContentLoaded", async () => {
   Split(["#textarea", "#terminal"], {
     direction: "vertical",
+    sizes: [70, 30],
   });
 
   let commandLineArgs;
