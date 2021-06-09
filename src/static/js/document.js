@@ -85,14 +85,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   let commandLineArgs;
   let stdin;
   document.getElementById("save-btn").addEventListener("click", e => {
-    const settingsModal = document.getElementById("settingsModal");
     const commandLineArgsField = document.getElementById("cl-args-field");
     const stdinField = document.getElementById("stdin-field");
 
     commandLineArgs = commandLineArgsField.value.split(" ");
     stdin = stdinField.value;
-    console.log(commandLineArgs, stdin);
-    return;
   });
 
   const terminalOutput = document.getElementById("terminal-output");
