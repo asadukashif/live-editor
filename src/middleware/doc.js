@@ -1,4 +1,4 @@
-const { connection } = require("../config/sharedb");
+const { connection, collection } = require("../config/sharedb");
 const { v4 } = require("uuid");
 const { langMap } = require("../config/langMap")
 const Document = require("../models/Document")
@@ -65,7 +65,7 @@ const fileNames = [
 module.exports = {
   ensureDoc: (req, res, next) => {
     const docid = req.params.id;
-    let doc = connection.get("docs", docid);
+    let doc = connection.get(collection, docid);
 
     doc.fetch(function (err) {
       if (err) throw err;
@@ -93,7 +93,7 @@ module.exports = {
       return res.send("We have not yet supported this language")
     }
 
-    let doc = connection.get("docs", docid);
+    let doc = connection.get(collection, docid);
 
     doc.fetch(function (err) {
       if (err) throw err;
