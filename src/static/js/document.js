@@ -15,6 +15,7 @@ require("codemirror/keymap/sublime");
 require("codemirror/addon/comment/comment");
 require("codemirror/addon/comment/continuecomment");
 
+const collection = "docs";
 const DEBUG = false;
 const MODES = {
   python: "text/x-python",
@@ -66,7 +67,7 @@ window.onload = event => {
     verbose: DEBUG,
     key: "content",
   });
-  doc = connection.get("docs", docid);
+  doc = connection.get(collection, docid);
   shareDBCodeMirror.attachDoc(doc, error => {
     if (error) {
       console.error(error);

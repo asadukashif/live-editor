@@ -100,8 +100,6 @@ module.exports = {
       if (doc.type === null) {
         doc.create({ content: langStart[lang] });
         if (req.user) {
-          console.log("User was present");
-          console.log(req.user);
           Document.create({
             _id: docid,
             owner: req.user.id,
