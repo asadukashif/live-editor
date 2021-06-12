@@ -39,6 +39,7 @@ app.use(passport.session());
 app.use((req, res, next) => {
   // Passing the user
   res.locals.user = req.user;
+  res.locals.currentURL = `${req.protocol}://${req.hostname}${req.path}`;
 
   next();
 });
