@@ -67,13 +67,17 @@ body {
   user-select: none;
 }
 
+.gutter:hover {
+  background-color: aliceblue;
+}
 .gutter {
   display: flex;
   background-color: black;
   background-repeat: no-repeat;
   background-position: 50% center;
-  height: 7px;
+  height: 3px;
   background-image: url("/img/horizontal.png");
+  transition: background-color 0.2s ease 0s;
 }
 .split {
   background-color: white;
@@ -88,11 +92,11 @@ body {
 }
 
 #textarea {
-  background-color: #1a1919;
   font: "Fira Code";
 }
 
 #textarea .CodeMirror {
+  background-color: #101010 !important;
   font-family: "Fira Code";
   width: 100%;
   height: 100%;
@@ -103,4 +107,43 @@ body {
 #textarea .CodeMirror-gutter {
   background-color: #101010;
   margin-right: 0.3;
+  border-right: 0.1px solid #ffffff4d;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 140px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
