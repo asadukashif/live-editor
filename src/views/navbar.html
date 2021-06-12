@@ -1,9 +1,6 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
 <nav class="navbar navbar-expand-lg navbar sticky-top navbar-dark mx-auto">
-  <div class="container-fluid mx-5">
+  <div class="container-fluid mx-lg-5 m-sm-0">
     <a class="navbar-brand ms-0" href="/"><img src="/img/brand.png" height="64" width="64" alt="logo"></a>
-    <!-- <a class="navbar-brand flex-nowrap heading fs-3" style="letter-spacing: 0.3rem;" href="/">Bocks</a> -->
     {% if user %}
 
     {% if isDocument %}
@@ -20,24 +17,36 @@
     {% endif %}
 
     {% if isDocument %}
-    <button id="run-code" class="btn btn-md btn-outline-warning ms-auto me-auto"><span
-        class="d-lg-inline d-none d-md-inline">Execute</span>
-      <i class="fas fa-play fa-1x"></i></button>
+    <div class="ms-auto me-auto fs-6">
+      <button id="run-code" class="btn btn-md btn-outline-warning me-1"><span
+          class="d-lg-inline d-none d-md-inline">Execute</span>
+        <i class="fas fa-play fa-1x"></i>
+      </button>
+      <button id="share-btn" class="btn btn-md btn-outline-info ms-auto me-auto"><span
+          class="d-lg-inline d-none d-md-inline">Share</span>
+        <i class="fas fa-user-plus"></i>
+      </button>
+    </div>
     {% endif %}
 
     <div class="m-sm-0 d-flex justify-content-end align-items-end flex-column">
       <button class="btn-toggle btn-outline-light btn d-lg-none text-center" style="border: none;" type="button"
         data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
         aria-label="Toggle navigation">
-        <span><i class="fas fa-bars"></i></span>
+        <span><i class="fas fa-bars fa-1x"></i></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav justify-content-around d-flex align-items-end justify-content-end"
           style="min-width: 15vw;">
-          <li class=" nav-item">
+          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
+          {% if user %}
+          <li class="nav-item me-1">
+            <a class="nav-link active" aria-current="page" href="/users/{{ user.id }}">Profile</a>
+          </li>
+          {% endif %}
           <li class="nav-item">
             <a class="btn btn-outline-light github-btn flex-nowrap" href="https://github.com/ShaderOX/live-editor"><i
                 class="fab fa-github-square"></i> GitHub</a>
