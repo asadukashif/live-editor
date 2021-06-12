@@ -16,6 +16,7 @@ require("codemirror/keymap/sublime");
 require("codemirror/addon/comment/comment");
 require("codemirror/addon/comment/continuecomment");
 
+const collection = "docs";
 const DEBUG = false;
 const MODES = {
   python: "text/x-python",
@@ -34,7 +35,7 @@ const VERSIONS = {
 };
 
 let ws, connection, codeMirror, shareDBCodeMirror;
-console.log(language);
+
 window.onload = event => {
   ws = new WebSocket("ws://" + window.location.host);
   connection = new ShareDB.Connection(ws);
@@ -67,8 +68,7 @@ window.onload = event => {
     verbose: DEBUG,
     key: "content",
   });
-  console.log(docid);
-  doc = connection.get("docs", docid);
+  doc = connection.get(collection, docid);
   shareDBCodeMirror.attachDoc(doc, error => {
     if (error) {
       console.error(error);
