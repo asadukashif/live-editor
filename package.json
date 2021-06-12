@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon --ext html,js,css src/server.js ",
-    "build": "browserify src/static/js/document.js -o src/static/dist/test-bundle.js",
+    "build": "browserify src/static/js/document.js -o src/static/dist/bundle.js",
     "deploy": "node src/app.js",
     "watch": "nodemon --watch src/static/js/document.js --exec npm run build"
   },
