@@ -33,7 +33,7 @@ const VERSIONS = {
 };
 
 let ws, connection, codeMirror, shareDBCodeMirror;
-console.log(language);
+
 window.onload = event => {
   ws = new WebSocket("ws://" + window.location.host);
   connection = new ShareDB.Connection(ws);
@@ -66,7 +66,6 @@ window.onload = event => {
     verbose: DEBUG,
     key: "content",
   });
-  console.log(docid);
   doc = connection.get("docs", docid);
   shareDBCodeMirror.attachDoc(doc, error => {
     if (error) {

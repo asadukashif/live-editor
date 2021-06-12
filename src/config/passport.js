@@ -42,7 +42,6 @@ module.exports = function (passport) {
         callbackURL: "/auth/github/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
-        console.log(profile);
         const newUser = {
           _id: profile.id,
           name: profile.username,

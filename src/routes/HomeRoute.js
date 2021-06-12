@@ -3,7 +3,6 @@ const { ensureAuth } = require("../middleware/auth");
 const Document = require("../models/Document");
 
 router.get("/", (req, res) => {
-  console.log(req.user);
   res.render("home.html");
 });
 
