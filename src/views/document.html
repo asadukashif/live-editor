@@ -9,14 +9,12 @@
 
 {% block bodyContent %}
 
-
 {% set isDocument = true %}
 {% include 'navbar.html' %}
 
-<div class="main-container mx-md-4 mx-lg-4 m-sm-0">
-  <!-- <div class="py-3 d-flex align-items-center justify-content-center">
-    <button id="run-code" class="btn btn-md btn-outline-warning">Execute <i class="fas fa-play fa-1x"></i></button>
-  </div> -->
+<div id="url-container" data-url="{{ currentURL }}"></div>
+
+<div class="main-container mx-lg-4 m-sm-0">
   <div id="textarea" class="mt-3"></div>
   <div id="terminal" class="terminal text-white mt-auto d-flex">
     <span class="me-3" style="color: #00ff11; font-size: 1rem;">$</span><textarea id="terminal-output"
@@ -56,8 +54,7 @@
   </div>
 </div>
 
-{% endblock bodyContent %} <div class="run-code" id="run-code"><button>Run</button>
-</div>
+{% endblock bodyContent %}
 
 {% block scripts %}
 <script src="/dist/test-bundle.js"></script>
