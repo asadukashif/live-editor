@@ -52,3 +52,7 @@
   border-radius: inherit;
   /* box-shadow: 3px  3px 10px white; */
 }
+
+.recents {
+  margin-bottom: 9rem;
+}
