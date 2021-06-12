@@ -7,6 +7,7 @@ const { langMap } = require("../../config/langMap");
 const docid = window.location.href.split("/")[4];
 const language = langMap[docid.slice(0, 4)];
 const Split = require("split.js");
+const { CodeExecutor } = require("./CodeExecutor");
 require("codemirror/addon/edit/closebrackets");
 require("codemirror/addon/edit/matchbrackets");
 require("codemirror/addon/edit/closetag");
@@ -83,6 +84,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     sizes: [70, 30],
   });
 
+  document.getElementById("share-btn").addEventListener("click", e => {
+    const URLContainer = document.getElementById("url-container");
+    const copyElement = document.createElement("input");
+    const URL = URLContainer.dataset.url;
+    copyElement.setAttribute("value", URL);
+    URLContainer.appendChild(copyElement);
+    copyElement.select();
+    document.execCommand("copy");
+    URLContainer.removeChild(copyElement);
+  });
+
   let commandLineArgs;
   let stdin;
   document.getElementById("save-btn").addEventListener("click", e => {
@@ -100,50 +112,43 @@ document.addEventListener("DOMContentLoaded", async () => {
     const code = codeMirror.getValue();
 
     terminalOutput.classList.remove("text-danger");
+
+    console.log("Langauge", language);
+    const codeExecutor = new CodeExecutor(
+      code,
+      language,
+      EXTS[language],
+      VERSIONS[language],
+      {
+        stdin,
+        args: commandLineArgs,
+      }
+    );
+
     terminalOutput.innerHTML = "Compiling...";
 
-    fetch("https://emkc.org/api/v2/piston/execute", {
-      method: "POST",
-      body: JSON.stringify({
-        version: VERSIONS[language],
-        language,
-        files: [
-          {
-            name: `${new Date().toISOString()}${EXTS[language]}`,
-            content: code,
-          },
-        ],
-        stdin: stdin,
-        args: commandLineArgs,
-        compile_timeout: 10000,
-        run_timeout: 3000,
-        compile_memory_limit: -1,
-        run_memory_limit: -1,
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        const { run, compile } = data;
-        let output = "";
-        let statusCode = 0;
+    codeExecutor.execute(data => {
+      const { run, compile } = data;
+      let output = "";
+      let statusCode = 0;
 
-        // Checking for compilation errors
-        if (compile && compile.stderr) {
-          terminalOutput.classList.add("text-danger");
-          output = compile.stderr;
-          statusCode = compile.code;
+      // Checking for compilation errors
+      if (compile && compile.stderr) {
+        terminalOutput.classList.add("text-danger");
+        output = compile.stderr;
+        statusCode = compile.code;
+      } else {
+        // Checking for runtime errors
+        statusCode = run.code;
+
+        if (!run.stderr) {
+          output = run.stdout;
         } else {
-          // Checking for runtime errors
-          statusCode = run.code;
-
-          if (!run.stderr) {
-            output = run.stdout;
-          } else {
-            terminalOutput.classList.add("text-danger");
-            output = run.stderr;
-          }
+          terminalOutput.classList.add("text-danger");
+          output = run.stderr;
         }
-        terminalOutput.innerHTML = `${output}\n\nProgram finished with exit code ${statusCode}`;
-      });
+      }
+      terminalOutput.innerHTML = `${output}\n\nProgram finished with exit code ${statusCode}`;
+    });
   });
 });
