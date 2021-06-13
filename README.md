@@ -24,7 +24,7 @@ git clone https://github.com/ShaderOX/live-editor.git && cd live-editor
 
 Installs the required packages
 ```
-npm ci
+npm i
 ```
 
 Builds the release JavaScript file
