@@ -84,7 +84,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     sizes: [70, 30],
   });
 
-  document.getElementById("share-btn").addEventListener("click", e => {
+  const shareBtn = document.getElementById("share-btn");
+  shareBtn.lastElementChild.style.display = "none";
+
+  shareBtn.addEventListener("click", e => {
+    shareBtn.firstElementChild.style.display = "none";
+    shareBtn.classList.toggle("btn-outline-success");
+    shareBtn.classList.toggle("btn-outline-info");
+
+    shareBtn.lastElementChild.style.display = "";
     const URLContainer = document.getElementById("url-container");
     const copyElement = document.createElement("input");
     const URL = URLContainer.dataset.url;
@@ -93,6 +101,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     copyElement.select();
     document.execCommand("copy");
     URLContainer.removeChild(copyElement);
+    setTimeout(() => {
+      shareBtn.firstElementChild.style.display = "";
+      shareBtn.lastElementChild.style.display = "none";
+      shareBtn.classList.toggle("btn-outline-success");
+      shareBtn.classList.toggle("btn-outline-info");
+    }, 1500);
   });
 
   let commandLineArgs;
