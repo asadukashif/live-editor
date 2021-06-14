@@ -73,7 +73,6 @@ module.exports = {
         req.params.docFound = false;
         
       } else {
-        doc.language = "python";
         req.params.docFound = true;
       }
       next();
