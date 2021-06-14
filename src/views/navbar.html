@@ -27,21 +27,21 @@
     {% if isDocument %}
     <div class="ms-auto me-auto fs-6">
       <button id="run-code" class="btn btn-md btn-outline-warning me-1">
-        <span class="d-lg-inline d-none d-md-inline">
+        <span class="d-xl-inline d-none">
           Execute</span>
         <i class="fas fa-play fa-1x"></i>
       </button>
       <div class="d-inline mx-2">
-        {{ languageLogo[ document.language ] }}<span class="d-none d-md-inline text-white">{{ document.name }}.{{
+        {{ languageLogo[ document.language ] }}<span class="d-none d-sm-inline text-white">{{ document.name }}.{{
           languageExts[ document.language ] }}</span>
       </div>
       <button id="share-btn" class="btn btn-md btn-outline-info ms-auto me-auto"
         style="transition: background-color 0.3s;">
         <span>
-          <span class="d-lg-inline d-none d-md-inline">Share</span>
+          <span class="d-xl-inline d-none">Share</span>
           <i class="fas fa-user-plus"></i>
         </span>
-        <span><span class="d-lg-inline d-none d-md-inline">Copied</span> <i class="fas fa-check"></i></span>
+        <span><span class="d-xl-inline d-none">Copied</span> <i class="fas fa-check"></i></span>
       </button>
     </div>
     {% endif %}
