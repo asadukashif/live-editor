@@ -1,6 +1,6 @@
 {% set languageLogo = { 'cpp': '<img class="me-1" src="/img/cpp.svg" width="24" height="24">',
-                        "node-js": ' <i class="fab fa-js fa-lg me-1" style="color: white;"></i>' ,
-                        "python": '<img class="me-1" src="/img/python.svg" width="24" height="24">' } %}
+"node-js": ' <i class="fab fa-js fa-lg me-1" style="color: white;"></i>' ,
+"python": '<img class="me-1" src="/img/python.svg" width="24" height="24">' } %}
 
 {% set languageExts = { 'cpp': 'cpp',
 "node-js": 'js' ,
@@ -70,11 +70,11 @@
             </a>
           </li>
           {% if not user %}
-          <!-- <li class="nav-item me-1">
+          <li class="nav-item me-1">
             <a class="btn btn-outline-light github-btn flex-nowrap" aria-current="page" href="/auth/github">
               <i class="fab fa-github-square"></i> Login</a>
-          </li> -->
-          <li class="nav-item dropdown">
+          </li>
+          <!-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               Login
@@ -85,7 +85,7 @@
               <li><a class="dropdown-item" href="/auth/github">
                   <img src="/img/github.png" height="16" width="16" /> GitHub</a></li>
             </ul>
-          </li>
+          </li> -->
           {% else %}
           <li class="nav-item">
             <a class="btn btn-outline-light github-btn flex-nowrap ms-1" aria-current="page" href="/auth/logout">
