@@ -38,7 +38,7 @@ let ws, connection, codeMirror, shareDBCodeMirror;
 
 window.onload = event => {
   ws = new WebSocket(
-    (window.location.protocol === "https" ? "wss://" : "ws://") +
+    (window.location.protocol === "https:" ? "wss://" : "ws://") +
       window.location.host
   );
   connection = new ShareDB.Connection(ws);
