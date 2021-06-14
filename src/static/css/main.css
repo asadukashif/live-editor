@@ -49,12 +49,16 @@ nav,
 .bg-b-roll {
   padding: 0;
   margin: 0;
-  position: absolute;
+  position: fixed;
   min-width: 100%;
   min-height: 100%;
   z-index: -1;
   background-size: contain;
   background-position: center;
+}
+
+.bg-black {
+  background-color: #000000cc;
 }
 
 .getting-started {
@@ -63,6 +67,7 @@ nav,
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .getting-started-btn:hover {
@@ -70,14 +75,13 @@ nav,
 }
 
 .jumbotron {
-  height: 25rem;
+  /* height: 25rem; */
   display: flex;
   align-items: center;
   justify-content: space-around;
   /* border: 1px solid rgba(255, 255, 255, 0.514); */
   /* background-color: rgba(0, 17, 17, 0.7);
   */
-  background: black;
   height: auto;
 }
 
