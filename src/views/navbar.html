@@ -2,77 +2,79 @@
                         "node-js": ' <i class="fab fa-js fa-lg me-1" style="color: white;"></i>' ,
                         "python": '<img class="me-1" src="/img/python.svg" width="24" height="24">' } %}
 
-                        {% set languageExts = { 'cpp': 'cpp',
-                        "node-js": 'js' ,
-                        "python": 'py' } %}
-                        
+{% set languageExts = { 'cpp': 'cpp',
+"node-js": 'js' ,
+"python": 'py' } %}
+
 
 <nav class="navbar navbar-expand-lg navbar sticky-top navbar-dark mx-auto">
-<div class="container-fluid mx-lg-5 m-sm-0">
-  <a class="navbar-brand mx-0" href="/"><img src="/img/brand.png" height="64" width="64" alt="logo"></a>
-  {% if user %}
+  <div class="container-fluid mx-lg-5 m-sm-0">
+    <a class="navbar-brand mx-0" href="/"><img src="/img/brand.png" height="64" width="64" alt="logo"></a>
+    {% if user %}
 
-  {% if isDocument %}
-  <span class="ms-1 d-lg-block d-none text-lead fs-6"
-    style=' letter-spacing: 0.15rem; font-family: "fira code" ;'>
-<a class="text-white" style="text-decoration: none;" href="/users/{{ user._id }}">@{{ user.name }}</a>
-</span>
-{% else %}
-<span class="text-white ms-1 d-lg-block d-none d-md-block text-lead fs-6"
-  style="letter-spacing: 0.15rem; font-family: 'fira code'; margin: 0 auto;">
-  <a class="text-white" style="text-decoration: none;" href="/users/{{ user._id }}">@{{ user.name }}</a>
-</span>
-{% endif %}
-{% endif %}
-
-{% if isDocument %}
-<div class="ms-auto me-auto fs-6">
-  <button id="run-code" class="btn btn-md btn-outline-warning me-1">
-    <span class="d-lg-inline d-none d-md-inline">
-      Execute</span>
-    <i class="fas fa-play fa-1x"></i>
-  </button>
-  <div class="d-inline mx-2">
-      {{ languageLogo[ document.language ] }}<span class="d-none d-md-inline text-white">{{ document.name }}.{{ languageExts[ document.language ] }}</span>
-  </div>
-  <button id="share-btn" class="btn btn-md btn-outline-info ms-auto me-auto" style="transition: background-color 0.3s;">
-    <span>
-      <span class="d-lg-inline d-none d-md-inline">Share</span>
-      <i class="fas fa-user-plus"></i>
+    {% if isDocument %}
+    <span class="ms-1 d-lg-block d-none text-lead fs-6" style=' letter-spacing: 0.15rem; font-family: "fira code" ;'>
+      <a class="text-white" style="text-decoration: none;" href="/users/{{ user._id }}">@{{ user.name }}</a>
     </span>
-    <span><span class="d-lg-inline d-none d-md-inline">Copied</span> <i class="fas fa-check"></i></span>
-  </button>
-</div>
-{% endif %}
+    {% else %}
+    <span class="text-white ms-1 d-lg-block d-none d-md-block text-lead fs-6"
+      style="letter-spacing: 0.15rem; font-family: 'fira code'; margin: 0 auto;">
+      <a class="text-white" style="text-decoration: none;" href="/users/{{ user._id }}">@{{ user.name }}</a>
+    </span>
+    {% endif %}
+    {% endif %}
 
-<div class="m-sm-0 d-flex justify-content-end align-items-end flex-column">
-  <button class="btn-toggle btn-outline-light btn d-lg-none text-center" style="border: none;" type="button"
-    data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
-    aria-label="Toggle navigation">
-    <span><i class="fas fa-bars fa-1x"></i></span>
-  </button>
+    {% if isDocument %}
+    <div class="ms-auto me-auto fs-6">
+      <button id="run-code" class="btn btn-md btn-outline-warning me-1">
+        <span class="d-lg-inline d-none d-md-inline">
+          Execute</span>
+        <i class="fas fa-play fa-1x"></i>
+      </button>
+      <div class="d-inline mx-2">
+        {{ languageLogo[ document.language ] }}<span class="d-none d-md-inline text-white">{{ document.name }}.{{
+          languageExts[ document.language ] }}</span>
+      </div>
+      <button id="share-btn" class="btn btn-md btn-outline-info ms-auto me-auto"
+        style="transition: background-color 0.3s;">
+        <span>
+          <span class="d-lg-inline d-none d-md-inline">Share</span>
+          <i class="fas fa-user-plus"></i>
+        </span>
+        <span><span class="d-lg-inline d-none d-md-inline">Copied</span> <i class="fas fa-check"></i></span>
+      </button>
+    </div>
+    {% endif %}
 
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav justify-content-around d-flex align-items-end justify-content-end" style="min-width: 15vw;">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/">Home</a>
-      </li>
-      {% if user %}
-      <li class="nav-item me-1">
-        <a class="nav-link active" aria-current="page" href="/users/{{ user.id }}">Profile</a>
-      </li>
-      {% endif %}
-      <li class="nav-item">
-        <a class="nav-link active" href="https://github.com/ShaderOX/live-editor">
-          Source
-        </a>
-      </li>
-      {% if not user %}
-      <li class="nav-item me-1">
-        <a class="btn btn-outline-light github-btn flex-nowrap" aria-current="page" href="/auth/github">
-          <i class="fab fa-github-square"></i> Login</a>
-      </li>
-      <!-- <li class="nav-item dropdown">
+    <div class="m-sm-0 d-flex justify-content-end align-items-end flex-column">
+      <button class="btn-toggle btn-outline-light btn d-lg-none text-center" style="border: none;" type="button"
+        data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span><i class="fas fa-bars fa-1x"></i></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav justify-content-around d-flex align-items-end justify-content-end"
+          style="min-width: 15vw;">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          {% if user %}
+          <li class="nav-item me-1">
+            <a class="nav-link active" aria-current="page" href="/users/{{ user.id }}">Profile</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link active" href="https://github.com/ShaderOX/live-editor">
+              Source
+            </a>
+          </li>
+          {% if not user %}
+          <!-- <li class="nav-item me-1">
+            <a class="btn btn-outline-light github-btn flex-nowrap" aria-current="page" href="/auth/github">
+              <i class="fab fa-github-square"></i> Login</a>
+          </li> -->
+          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
               Login
@@ -83,15 +85,15 @@
               <li><a class="dropdown-item" href="/auth/github">
                   <img src="/img/github.png" height="16" width="16" /> GitHub</a></li>
             </ul>
-          </li> -->
-      {% else %}
-      <li class="nav-item">
-        <a class="btn btn-outline-light github-btn flex-nowrap ms-1" aria-current="page" href="/auth/logout">
-          <i class="fas fa-sign-out-alt"></i> Logout</a>
-      </li>
-      {% endif %}
-    </ul>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="btn btn-outline-light github-btn flex-nowrap ms-1" aria-current="page" href="/auth/logout">
+              <i class="fas fa-sign-out-alt"></i> Logout</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
   </div>
-</div>
-</div>
 </nav>
