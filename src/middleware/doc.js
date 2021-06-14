@@ -6,7 +6,7 @@ const Document = require("../models/Document");
 const langStart = {
   python: 'print("Hello World")',
   "node-js": 'console.log("Hello World");',
-  cpp: '#include <iostream>\r\n\r\nclass Box\r\n{\r\n  int length, width;\r\n\r\npublic:\r\n  Box(int l, int w) : length(l), width(w)\r\n  {\r\n    std::cout << "Box has been created!" << std::endl;\r\n  }\r\n\r\n  int GetPerimeter()\r\n  {\r\n    return 2 * (length + width);\r\n  }\r\n\r\n  int GetArea()\r\n  {\r\n    return length * width;\r\n  }\r\n\r\n  ~Box()\r\n  {\r\n    std::cout << "Box has been destroyed!" << std::endl;\r\n  }\r\n};\r\n\r\nint main()\r\n{\r\n  Box b(12, 1);\r\n  std::cout << "Area: " << b.GetArea() << std::endl;\r\n  std::cout << "Perimeter: " << b.GetPerimeter() << std::endl;\r\n}\r\n',
+  cpp: '#include <iostream>\n\nint main(int argc, char** argv) {\n\tstd::cout << "Hello World" << std::endl;\n}',
 };
 
 const fileNames = [
@@ -70,9 +70,7 @@ module.exports = {
     doc.fetch(function (err) {
       if (err) throw err;
       if (doc.type === null) {
-        req.params.docFound = false;
-      } else {
-        req.params.docFound = true;
+        return res.send("This document was not found");
       }
       next();
     });

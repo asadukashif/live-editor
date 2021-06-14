@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const { createDoc } = require("../middleware/doc");
+const { createDoc, ensureDoc } = require("../middleware/doc");
 const Document = require("../models/Document")
 
 router.get("/new/:lang", createDoc, (req, res) => {
   res.redirect(`/document/${req.params.docid}`);
 });
 
-router.get("/:id/", (req, res) => {
+router.get("/:id/", ensureDoc, (req, res) => {
   Document.find(
     {
       _id: req.params.id,
@@ -15,11 +15,8 @@ router.get("/:id/", (req, res) => {
       if (err) {
         console.log(err);
       }
-      if (doc.length != 1) {
-        return res.send("The document does not exist");
-      }
       return res.render("document.html", {
-        document: doc[0],
+        document: doc.length == 1 ? doc[0] : null,
       });
     }
   );
