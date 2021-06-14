@@ -37,7 +37,10 @@ const VERSIONS = {
 let ws, connection, codeMirror, shareDBCodeMirror;
 
 window.onload = event => {
-  ws = new WebSocket("ws://" + window.location.host);
+  ws = new WebSocket(
+    (window.location.protocol === "https" ? "wss://" : "ws://") +
+      window.location.host
+  );
   connection = new ShareDB.Connection(ws);
 
   switch (language) {
