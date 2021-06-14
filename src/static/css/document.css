@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap");
-
 body {
   background-image: none !important;
   background-color: black !important;
@@ -12,7 +10,7 @@ body {
 .terminal {
   height: 45vh;
   background-color: #101010;
-  font-family: "monaco";
+  font-family: "monaco", consolas, monospace;
   padding: 0.5rem;
   cursor: text;
 }
