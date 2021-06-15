@@ -14,8 +14,8 @@
 
 Share and collaborate on your code with developers anywhere.
 
-## Check it out here now!
-The application is live at https://bocks-editor.uaenorth.cloudapp.azure.com
+## Check it out!
+The application is live [here](https://bocks-editor.uaenorth.cloudapp.azure.com)
 
 ## Features:
 * Supported Languages: 
