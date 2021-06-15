@@ -35,6 +35,7 @@
     "sharedb-mongo": "*",
     "split.js": "^1.6.4",
     "uuid": "^8.3.2",
-    "websocket-json-stream": "^0.0.3"
+    "websocket-json-stream": "^0.0.3",
+    "ws": "^7.4.6"
   }
 }
