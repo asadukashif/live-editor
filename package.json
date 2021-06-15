@@ -10,7 +10,7 @@
     "watch": "nodemon --watch src/static/js/document.js --exec npm run build"
   },
   "author": "ShaderOX, green-mint",
-  "license": "Unlicensed",
+  "license": "MIT",
   "devDependencies": {
     "nodemon": "^2.0.7"
   },
