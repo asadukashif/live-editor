@@ -95,14 +95,13 @@ module.exports = {
       if (err) throw err;
       if (doc.type === null) {
         doc.create({ content: langStart[lang] });
-        if (req.user) {
-          Document.create({
-            _id: docid,
-            owner: req.user.id,
-            name: fileNames[Math.floor(Math.random() * fileNames.length)],
-            language: lang,
-          });
-        }
+        Document.create({
+          _id: docid,
+          owner: req.user ? req.user.id : "guest",
+          name: fileNames[Math.floor(Math.random() * fileNames.length)],
+          language: lang,
+        });
+
         req.params.docid = docid;
       } else {
         console.log("Document was already created");
