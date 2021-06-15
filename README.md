@@ -2,6 +2,9 @@
 
 Share and live collaborate on your code with developers anywhere.
 
+![Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https%3A%2F%2Fbocks-editor.uaenorth.cloudapp.azure.com%2F)
+</br>
+
 ## Check it out here now!
 The application is live at https://bocks-editor.uaenorth.cloudapp.azure.com
 
