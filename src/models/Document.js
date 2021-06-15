@@ -16,7 +16,7 @@ const DocumentSchema = new Schema({
   language: {
     type: String,
     required: true,
-  }
+  },
 });
 
 module.exports = model("Document", DocumentSchema);

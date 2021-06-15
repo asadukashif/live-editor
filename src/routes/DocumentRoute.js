@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { createDoc, ensureDoc } = require("../middleware/doc");
-const Document = require("../models/Document")
+const Document = require("../models/Document");
 
 router.get("/new/:lang", createDoc, (req, res) => {
   res.redirect(`/document/${req.params.docid}`);

@@ -6,7 +6,6 @@ const connectDB = require("./config/mongodb");
 const { backend } = require("./config/sharedb");
 require("dotenv").config();
 
-
 // Connect to the database
 connectDB();
 

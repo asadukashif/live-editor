@@ -19,13 +19,11 @@ router.get(
   }
 );
 
-router.get(
-  "/github/", ensureGuest,
-  passport.authenticate("github", )
-)
+router.get("/github/", ensureGuest, passport.authenticate("github"));
 
 router.get(
-  "/github/callback", ensureGuest,
+  "/github/callback",
+  ensureGuest,
   passport.authenticate("github", { failureRedirect: "/" }),
   (req, res) => {
     res.redirect("/");
