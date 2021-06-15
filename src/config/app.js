@@ -23,7 +23,7 @@ app.use(express.static(path.join("src", "static")));
 // session middleware
 app.use(
   session({
-    secret: "Jihad",
+    secret: process.env.SESS_SECRET,
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({

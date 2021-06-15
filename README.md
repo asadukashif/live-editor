@@ -62,6 +62,7 @@ The application would need
 
 * `PORT` (defaults to 3000)  
 * `MONGO_URI` 
+* `SESS_SECRET`
 * `GITHUB_CLIENT_ID` 
 * `GITHUB_CLIENT_SECRET` 
 <br />
@@ -75,7 +76,7 @@ npm start
 and open http://localhost:3000 to access the running application
 
 ## LICENSE
-[LICENSE.md](./LICENSE.md)
+[LICENSE](./LICENSE)
 
 ## Code of Conduct 
 [Code of Conduct.md](./docs/CODE_OF_CONDUCT.md)
