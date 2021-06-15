@@ -1,14 +1,21 @@
-# Realtime Collaborative Code Editor
 
-Share and live collaborate on your code with developers anywhere.
+<h1 align="center"> Realtime Collaborative Code Editor </h1>
 
-![Website](https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https%3A%2F%2Fbocks-editor.uaenorth.cloudapp.azure.com%2F)
-</br>
+
+<p align="center">
+
+<img alt="Website" src="https://img.shields.io/website?down_color=red&down_message=offline&style=plastic&up_color=green&up_message=online&url=https%3A%2F%2Fbocks-editor.uaenorth.cloudapp.azure.com%2F">
+
+<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/ShaderOX/live-editor?style=plastic">
+
+<img alt="APM" src="https://img.shields.io/apm/l/npm?style=plastic">
+
+</p>
+
+Share and collaborate on your code with developers anywhere.
 
 ## Check it out here now!
 The application is live at https://bocks-editor.uaenorth.cloudapp.azure.com
-
-___
 
 ## Features:
 * Supported Languages: 
@@ -23,8 +30,6 @@ ___
 * Sublime Text Key binds integrated
 * Responsive Design suitable for Desktop, Tablets and Mobile
 
-___
-<br />
 
 ## Build:
 
@@ -69,8 +74,8 @@ npm start
 ```
 and open http://localhost:3000 to access the running application
 
-___
-<br />
+## LICENSE
+[LICENSE.md](./LICENSE.md)
 
 ## Code of Conduct 
 [Code of Conduct.md](./docs/CODE_OF_CONDUCT.md)
