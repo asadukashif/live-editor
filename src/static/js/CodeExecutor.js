@@ -1,4 +1,4 @@
-module.exports.CodeExecutor = class CodeExecutor {
+class CodeExecutor extends Executor {
   constructor(code, language, fileExt, version, options) {
     const {
       stdin,
@@ -40,4 +40,6 @@ module.exports.CodeExecutor = class CodeExecutor {
         throw new Error("Request Failed " + err);
       });
   }
-};
+}
+
+module.exports.CodeExecutor = CodeExecutor;
