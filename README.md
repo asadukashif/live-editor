@@ -30,6 +30,14 @@ The application is live [here](https://bocks-editor.uaenorth.cloudapp.azure.com)
 * Sublime Text Key binds integrated
 * Responsive Design suitable for Desktop, Tablets and Mobile
 
+## Demo:
+
+### Landing Page:
+![](./assets/MainPage.gif)
+
+### Live Sync
+![](./assets/sync.gif)
+
 
 ## Build:
 
@@ -38,8 +46,17 @@ You must have the following installed on your machine
 * [Node JS - v14.0 LTS](https://nodejs.org/en/download/)
 * [npm - Node Package Manager - v6.14](https://nodejs.org/en/download/)
 
+#### Configure the .env 
+The application would need
 
-<br /> 
+* `PORT` (defaults to 3000)  
+* `MONGO_URI` 
+* `SESS_SECRET`
+* `GITHUB_CLIENT_ID` 
+* `GITHUB_CLIENT_SECRET` 
+<br />
+<br />
+
 
 Clone the repository by running
 
@@ -57,15 +74,6 @@ Builds the release JavaScript file
 npm run build
 ```
 
-### Configure the .env 
-The application would need
-
-* `PORT` (defaults to 3000)  
-* `MONGO_URI` 
-* `SESS_SECRET`
-* `GITHUB_CLIENT_ID` 
-* `GITHUB_CLIENT_SECRET` 
-<br />
 
 variables in order to access the database and support Github Authentication.
 
